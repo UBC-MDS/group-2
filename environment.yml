@@ -35,6 +35,7 @@ dependencies:
   - vega_datasets # Example data
   - pip>=24.2
   - pip:
+      - ucimlrepo
       - mglearn
       - otter-grader
       - graphviz
