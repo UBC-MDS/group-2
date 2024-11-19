@@ -1,0 +1,46 @@
+# Install the course conda environment with the following command:
+# conda env create -f env-dsci-571.yml
+# Once you install it, you should be able to see it in your Jupyter Lab.
+# If not, check the documentation here: https://ipython.readthedocs.io/en/stable/install/kernel_install.html
+name: "522"
+
+channels:
+  - conda-forge
+  - pytorch
+  - anaconda
+  - plotly
+  - defaults
+dependencies:
+  - python==3.12
+  - ipykernel
+  - matplotlib
+  - pandas
+  - nb_conda_kernels
+  - scikit-learn>=1.5.1
+  - requests
+  - ipython
+  - graphviz
+  - python-graphviz
+  - jinja2
+  - lightgbm
+  - torchvision
+  - torchaudio
+  - pytorch
+  - autograd
+  - plotly
+  - panel
+  - watchfiles
+  - wikipedia
+  - altair-all
+  - vega_datasets # Example data
+  - pip>=24.2
+  - pip:
+      - mglearn
+      - otter-grader
+      - graphviz
+      - nbformat
+      - nbclient
+      - transformers
+      - datasets
+      - ultralytics
+      - psutil>=5.7.2
