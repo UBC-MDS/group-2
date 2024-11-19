@@ -8,7 +8,7 @@ All contributions, suggestions, and feedback you submitted are accepted under th
 
 ### Setting Up Your Environment
 
-Fork the Altair repository on GitHub and then clone the fork to you local
+Fork the repository on GitHub and then clone the fork to you local
 machine. For more details on forking see the [GitHub
 Documentation](https://help.github.com/en/articles/fork-a-repo).
 
