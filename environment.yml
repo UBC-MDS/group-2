@@ -1,4 +1,9 @@
-name: '522'
+# Install the course conda environment with the following command:
+# conda env create -f env-dsci-571.yml
+# Once you install it, you should be able to see it in your Jupyter Lab.
+# If not, check the documentation here: https://ipython.readthedocs.io/en/stable/install/kernel_install.html
+name: "522"
+
 channels:
   - conda-forge
   - pytorch
@@ -6,32 +11,18 @@ channels:
   - plotly
   - defaults
 dependencies:
-  - python=3.12.0
-  - pandas=2.2.3
-  - numpy=1.26.4
-  - scikit-learn=1.5.2
-  - altair=5.4.1
-  - jupyterlab=4.2.6
-  - jupyterlab_server=2.27.3
-  - jupyter_server=2.14.2
-  - jupyter_core=5.7.2
-  - jupyter_client=8.6.3
-  - ipykernel=6.29.5
-  - nb_conda_kernels=2.5.1
-  - matplotlib=3.9.2
-  - scipy=1.14.1
-  - vega_datasets
+  - python==3.12
+  - ipykernel
+  - matplotlib
+  - pandas
+  - nb_conda_kernels
+  - scikit-learn>=1.5.1
+  - requests
+  - ipython
   - graphviz
   - python-graphviz
-  - eli5
-  - shap
   - jinja2
   - lightgbm
-  - spacy
-  - xgboost
-  - catboost
-  - nltk
-  - imbalanced-learn
   - torchvision
   - torchaudio
   - pytorch
@@ -40,18 +31,17 @@ dependencies:
   - panel
   - watchfiles
   - wikipedia
-  - requests
-  - pip=24.3.1
-  - vl-convert-python>=1.6.0
+  - altair-all
+  - vega_datasets # Example data
+  - pip>=24.2
   - pip:
-    - altair-ally>=0.1.1
-    - ucimlrepo==0.0.7
-    - vegafusion==1.6.9
-    - vegafusion-python-embed==1.6.9
-    - mglearn
-    - spacymoji
-    - otter-grader>=6.0
-    - transformers
-    - datasets
-    - ultralytics
-    - psutil>=5.7.2
+      - ucimlrepo
+      - mglearn
+      - otter-grader
+      - graphviz
+      - nbformat
+      - nbclient
+      - transformers
+      - datasets
+      - ultralytics
+      - psutil>=5.7.2
