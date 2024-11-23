@@ -28,6 +28,7 @@ The model was evaluated using metrics such as accuracy, precision, recall, and F
 # List of Dependencies:
 - `conda` (version 24.9.1 or higher)
 - `conda-lock` (version 2.5.7 or higher)
+- Python package `ucimlrepo` (version 0.0.7)
 - `jupyterlab` (version 4.2.0 or higher)
 - `nb_conda_kernels` (version 2.5.1 or higher)
 - Python and packages listed in [`environment.yml`](https://github.com/UBC-MDS/group-2/blob/main/environment.yml)
