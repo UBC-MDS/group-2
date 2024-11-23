@@ -45,4 +45,4 @@ Open `notebooks/wine-quality.ipynb` in Jupyter lab and run all cells using the n
 - Python package `ucimlrepo` (version 0.0.7)
 - `jupyterlab` (version 4.2.0 or higher)
 - `nb_conda_kernels` (version 2.5.1 or higher)
-- Python and packages listed in [`environment.yml`](https://github.com/UBC-MDS/group-2/blob/main/environment.yml)
+- Python and packages listed in [`environment.yml`](https://github.com/UBC-MDS/wine-quality-regressor-group-2/blob/main/environment.yml)
