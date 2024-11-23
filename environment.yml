@@ -1,10 +1,6 @@
 name: '522'
 channels:
   - conda-forge
-  - pytorch
-  - anaconda
-  - plotly
-  - defaults
 dependencies:
   - python=3.12.0
   - pandas=2.2.3
@@ -20,27 +16,6 @@ dependencies:
   - nb_conda_kernels=2.5.1
   - matplotlib=3.9.2
   - scipy=1.14.1
-  - vega_datasets
-  - graphviz
-  - python-graphviz
-  - eli5
-  - shap
-  - jinja2
-  - lightgbm
-  - spacy
-  - xgboost
-  - catboost
-  - nltk
-  - imbalanced-learn
-  - torchvision
-  - torchaudio
-  - pytorch
-  - autograd
-  - plotly
-  - panel
-  - watchfiles
-  - wikipedia
-  - requests
   - pip=24.3.1
   - vl-convert-python>=1.6.0
   - pip:
@@ -48,10 +23,3 @@ dependencies:
     - ucimlrepo==0.0.7
     - vegafusion==1.6.9
     - vegafusion-python-embed==1.6.9
-    - mglearn
-    - spacymoji
-    - otter-grader>=6.0
-    - transformers
-    - datasets
-    - ultralytics
-    - psutil>=5.7.2
