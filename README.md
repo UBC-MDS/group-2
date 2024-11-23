@@ -24,6 +24,21 @@ Logistic regression was used as the base model.
 RandomizedSearchCV was applied for hyperparameter optimization.
 The model was evaluated using metrics such as accuracy, precision, recall, and F1-score.
 
+## Usage
+For the first time running the project, create the conda environment by running the following in the root of the repository:
+
+```bash
+conda-lock install --name wine-quality-regressor conda-lock.yml
+```
+
+To run the analysis, open Jupyter lab from the root of the repository:
+
+```bash
+jupyter lab
+```
+
+Open `notebooks/wine-quality.ipynb` in Jupyter lab and run all cells using the new `wine-quality-regressor` kernel.
+
 ## List of Dependencies:
 - `conda` (version 24.9.1 or higher)
 - `conda-lock` (version 2.5.7 or higher)
