@@ -1,13 +1,12 @@
-# Title:
-Analysis of Wine Quality and Prediction Using Logistic Regression
+# Analysis of Wine Quality and Prediction Using Logistic Regression
 
-# Contributors:
+## Contributors:
 Alix, Paramveer, Susannah, Zoe
 
-# Project Summary:
+## Project Summary:
 This project aims to analyze and predict the quality of wine based on various physicochemical properties. Using the UCI Wine Quality dataset, we conduct data preprocessing, exploratory data analysis, and build machine learning models to predict wine quality. The dataset includes multiple features, such as acidity, alcohol content, and sugar levels, which are critical in determining the quality score of wines. The project utilizes cross-validation and hyperparameter tuning to optimize model performance.
 
-# Data Analysis:
+## Data Analysis:
 Dataset:
 The dataset was sourced from the UCI Machine Learning Repository.
 
@@ -25,7 +24,7 @@ Logistic regression was used as the base model.
 RandomizedSearchCV was applied for hyperparameter optimization.
 The model was evaluated using metrics such as accuracy, precision, recall, and F1-score.
 
-# List of Dependencies:
+## List of Dependencies:
 - `conda` (version 24.9.1 or higher)
 - `conda-lock` (version 2.5.7 or higher)
 - Python package `ucimlrepo` (version 0.0.7)
