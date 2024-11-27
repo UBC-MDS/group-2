@@ -25,19 +25,31 @@ RandomizedSearchCV was applied for hyperparameter optimization.
 The model was evaluated using metrics such as accuracy, precision, recall, and F1-score.
 
 ## Usage
-For the first time running the project, create the conda environment by running the following in the root of the repository:
+
+### Setup
+
+> If you are using Windows or Mac, then please ensure that Docker Desktop is running.
+
+1. Clone this GitHub repository.
+2. Make sure `docker-compose.yml` is using the image with the tag you wish to run it with. No changes are necessary if there is not a specific image tag you would like to run.
+
+### Running the analysis
+
+1. Run the following command in a terminal in the root of the local repository to use the Docker image to run the analysis:
 
 ```bash
-conda-lock install --name wine-quality-regressor conda-lock.yml
+docker compose up
 ```
 
-To run the analysis, open Jupyter lab from the root of the repository:
+This command will automatically start up a Jupyter Lab session using the image listed in the `docker-compose.yml` file and mount the current project in the Docker container.
 
-```bash
-jupyter lab
-```
+2. In the terminal, look for the Jupyter Lab link which starts with `http://127.0.0.1:8888/`. Copy and paste the URL into the browser to open up Jupyter Lab.
 
-Open `notebooks/wine-quality.ipynb` in Jupyter lab and run all cells using the new `wine-quality-regressor` kernel.
+3. To run the analysis, open the notebook from `notebooks/wine_quality.ipynb` in this new Jupyter Lab session and in the "Kernel" menu, click "Restart Kernel and Run All".
+
+### Clean up
+
+Hit `Ctrl + C` in the terminal to end the Jupyter Lab session. Run the following command after the session ends to free up the resources used by Docker: `docker compose rm`.
 
 ## List of Dependencies:
 - `conda` (version 24.9.1 or higher)
