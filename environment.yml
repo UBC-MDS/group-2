@@ -24,3 +24,4 @@ dependencies:
     - ucimlrepo==0.0.7
     - vegafusion==1.6.9
     - vegafusion-python-embed==1.6.9
+    - deepchecks==0.18.1
