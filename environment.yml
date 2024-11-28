@@ -1,8 +1,8 @@
-name: '522'
+name: "522"
 channels:
   - conda-forge
 dependencies:
-  - python=3.12.0
+  - python=3.11.7
   - pandas=2.2.3
   - pandera=0.21.0
   - numpy=1.26.4
@@ -20,8 +20,8 @@ dependencies:
   - pip=24.3.1
   - vl-convert-python>=1.6.0
   - pip:
-    - altair-ally>=0.1.1
-    - ucimlrepo==0.0.7
-    - vegafusion==1.6.9
-    - vegafusion-python-embed==1.6.9
-    - deepchecks==0.18.1
+      - altair-ally>=0.1.1
+      - ucimlrepo==0.0.7
+      - vegafusion==1.6.9
+      - vegafusion-python-embed==1.6.9
+      - deepchecks==0.18.1
