@@ -28,7 +28,7 @@ The model was evaluated using metrics such as accuracy, precision, recall, and F
 
 ### Setup
 
-> If you are using Windows or Mac, then please ensure that Docker Desktop is running.
+> If you are using Windows or Mac, then please ensure that Docker Desktop is running. The user can be check if they have Docker by running the following command in a bash terminal: `docker --version`.
 
 1. Clone this GitHub repository.
 2. Make sure `docker-compose.yml` is using the image with the tag you wish to run it with. No changes are necessary if there is not a specific image tag you would like to run.
@@ -37,21 +37,46 @@ The model was evaluated using metrics such as accuracy, precision, recall, and F
 
 1. Run the following command in a terminal in the root of the local repository to use the Docker image to run the analysis:
 
-```bash
-docker compose up
-```
+    ```bash
+    docker compose up
+    ```
 
-This command will automatically start up a Jupyter Lab session using the image listed in the `docker-compose.yml` file and mount the current project in the Docker container.
+    This command will automatically start up a Jupyter Lab session using the image listed in the `docker-compose.yml` file and mount the current project in the Docker container.
 
 2. In the terminal, look for the Jupyter Lab link which starts with `http://127.0.0.1:8888/`. Copy and paste the URL into the browser to open up Jupyter Lab.
 
 3. To run the analysis, open the notebook from `notebooks/wine_quality.ipynb` in this new Jupyter Lab session and in the "Kernel" menu, click "Restart Kernel and Run All".
 
+#### Alternative way to run the analysis
+
+If the above instructions fail to work, the user can download the packages locally using the provided `environment.yml` file and create a conda environment.
+
+1. In the root directory of the project, run the following command in a bash terminal to create a conda environment named `522`:
+
+    ```bash
+    conda env create -f environment.yml
+    ```
+
+2. Activate the conda environment using the following command:
+
+    ```bash
+    conda activate 522
+    ```
+
+3. Run Jupyter Lab using the following command:
+
+    ```bash
+    jupyter lab
+    ```
+
+4. Once the Jupyter Lab session starts, navigate to the appropriate URL (`http://127.0.0.1:8888/`) and open the notebook from `notebooks/wine_quality.ipynb`, select the `522` kernel and run all the cells.
+
 ### Clean up
 
 Hit `Ctrl + C` in the terminal to end the Jupyter Lab session. Run the following command after the session ends to free up the resources used by Docker: `docker compose rm`.
 
-## List of Dependencies:
+## List of Dependencies
+
 - `conda` (version 24.9.1 or higher)
 - `conda-lock` (version 2.5.7 or higher)
 - Python package `ucimlrepo` (version 0.0.7)
