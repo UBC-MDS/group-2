@@ -10,7 +10,7 @@ from ucimlrepo import fetch_ucirepo
 @click.command()
 @click.option('--id', default=186, type=int, help='UCI repo ID of dataset')
 @click.option('--raw_data_out',
-              default='../data/raw/',
+              default='./data/raw/',
               type=str,
               help='Relative path save the raw data to')
 def load_save_data(id, raw_data_out):
