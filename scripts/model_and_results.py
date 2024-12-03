@@ -45,14 +45,15 @@ import warnings
 warnings.filterwarnings('ignore', category=FutureWarning)
 import pandera as pa
 
+from data_validation import clean_data
 
 @click.command()
 @click.option('--training-data', type=str, help="Path to training data")
-@click.option('--preprocessor', type=str, help="Path to preprocessor object")
+# @click.option('--preprocessor', type=str, help="Path to preprocessor object")
 # @click.option('--columns-to-drop', type=str, help="Optional: columns to drop")
 @click.option('--pipeline-to', type=str, help="Path to directory where the pipeline object will be written to")
 # @click.option('--plot-to', type=str, help="Path to directory where the plot will be written to")
-@click.option('--seed', type=int, help="Random seed", default=123)
+@click.option('--seed', type=int, help="Random seed", default=522)
 def main(training_data, preprocessor, columns_to_drop, pipeline_to, plot_to, seed):
     '''Fits a breast cancer classifier to the training data 
     and saves the pipeline object.'''
