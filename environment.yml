@@ -20,6 +20,7 @@ dependencies:
   - pip=24.3.1
   - vl-convert-python>=1.6.0
   - ucimlrepo=0.0.7
+  - quarto=1.5.57
   - vegafusion=1.6.9
   - vegafusion-python-embed=1.6.9
   - pip:
