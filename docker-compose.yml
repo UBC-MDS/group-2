@@ -1,7 +1,7 @@
 services:
   # run jupyter notebook inside jupyter 
   jupyter-notebook:
-    image:  pasingh211/wine-quality-regressor:419ae58
+    image:  pasingh211/wine-quality-regressor:3fe57b2
     ports:
       - "8888:8888"
     volumes:
