@@ -10,12 +10,10 @@ from sklearn.model_selection import train_test_split
 @click.command()
 @click.argument('raw_data_path',
                 default='./data/raw/wine_quality.csv',
-                type=str,
-                help='Relative path to raw data CSV file')
+                type=str)
 @click.argument('processed_data_path',
                 default='./data/processed',
-                type=str,
-                help='Relative path to store split training and test data')
+                type=str)
 @click.option('--seed',
               default=522,
               type=int,
@@ -26,8 +24,13 @@ from sklearn.model_selection import train_test_split
               help='Proportion of data to use in test set')
 def read_split_data(raw_data_path, processed_data_path, seed, test_size):
     """
-    Reads raw data from a CSV file and splits it into
-    training and test sets into the given proportion.
+    Reads raw data from RAW_DATA_PATH and splits it into
+    training and test sets and stores that at the folder
+    specified by PROCESSED_DATA_PATH. The data will be output as
+    training_set.csv and testing_set.csv
+
+    RAW_DATA_PATH is the relative path to the raw data CSV file.
+    PROCESSED_DATA_PATH is the relative path to the folder where split data is stored.
 
     By default, it reads from the data/raw folder and stores data splits in data/processed.
     The random seed is 522 by default and yields an 80:20 split for training and test.
@@ -43,3 +46,6 @@ def read_split_data(raw_data_path, processed_data_path, seed, test_size):
     # Store the training and test sets
     train_df.to_csv(os.path.join(processed_data_path, 'training_set.csv'), index=False)
     test_df.to_csv(os.path.join(processed_data_path, 'testing_set.csv'), index=False)
+
+if __name__ == '__main__':
+    read_split_data()
