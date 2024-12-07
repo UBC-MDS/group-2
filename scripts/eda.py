@@ -28,7 +28,7 @@ def eda(input_data, output_dir):
     ## 1.1 Distribution of quality scores across numerical features
     aly.alt.data_transformers.enable('vegafusion')
     aly_dist_chart = aly.dist(train_df, color='quality')
-    aly_dist_chart_path = os.path.join(output_dir, "aly_distribution_chart.html")
+    aly_dist_chart_path = os.path.join(output_dir, "dist_wine_scores_by_feature.png")
     aly_dist_chart.save(aly_dist_chart_path)
     print(f"1.1 Distribution chart saved to {aly_dist_chart_path}")
 
@@ -67,7 +67,7 @@ def eda(input_data, output_dir):
         height=300
     )
 
-    line_chart_path = os.path.join(output_dir, "proportion_quality_color.html")
+    line_chart_path = os.path.join(output_dir, "density_red_vs_white.png")
     line_chart.save(line_chart_path)
     print(f"1.2 Line chart saved to {line_chart_path}")
 
@@ -90,7 +90,7 @@ def eda(input_data, output_dir):
         'total_sulfur_dioxide'
     )
 
-    scatter_chart_path = os.path.join(output_dir, "scatter_correlation.html")
+    scatter_chart_path = os.path.join(output_dir, "feature_corrs.png")
     scatter_chart.save(scatter_chart_path)
     print(f"1.3 Scatter correlation chart saved to {scatter_chart_path}")
 
@@ -116,7 +116,7 @@ def eda(input_data, output_dir):
     ### Display all the box plots together
     n_cols = 3
     grid = alt.vconcat(*[alt.hconcat(*charts[i:i + n_cols]) for i in range(0, len(charts), n_cols)])
-    grid_path = os.path.join(output_dir, "outlier_boxplots.html")
+    grid_path = os.path.join(output_dir, "red_vs_white_all_features.png")
     grid.save(grid_path)
     print(f"1.4 Outlier boxplots saved to {grid_path}")
 
@@ -139,7 +139,7 @@ def eda(input_data, output_dir):
         title='Distribution of Wine Quality Scores'
     )
 
-    bar_chart_path = os.path.join(output_dir, "quality_distribution_bar.html")
+    bar_chart_path = os.path.join(output_dir, "dist_wine_scores.png")
     bar_chart.save(bar_chart_path)
     print(f"1.5 Bar chart saved to {bar_chart_path}")
 
