@@ -4,9 +4,11 @@
 # Run by following command: python ./scripts/validate_training_data.py --input-path "./data/processed/training_set.csv" --output-path "./results"
 
 import os
-import click
 import pandas as pd
 import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+import click
 from deepchecks.tabular import Dataset
 from deepchecks.tabular.checks import FeatureLabelCorrelation, FeatureFeatureCorrelation
 
@@ -35,7 +37,6 @@ def validate_training_data(input_path, output_path):
     os.makedirs(output_path, exist_ok=True)
 
     # Load data
-    print(f"Reading training data from {input_path}...")
     train_df = pd.read_csv(input_path)
 
     # Check data info and save
@@ -60,7 +61,6 @@ def validate_training_data(input_path, output_path):
     train_ds = Dataset(train_df, label="quality", cat_features=["color"])
 
     # Check 1: Feature-Label correlations
-    print("Running Feature-Label Correlation check...")
     check_feat_lab = FeatureLabelCorrelation()
     feat_lab_result = check_feat_lab.run(dataset=train_ds)
 
@@ -69,13 +69,19 @@ def validate_training_data(input_path, output_path):
     feat_lab_result.value.to_json(feat_lab_output)
     print(f"Feature-Label Correlation saved to {feat_lab_output}")
 
+    # Plot Feature-Label Correlation
+    feat_lab_plot_path = os.path.join(output_path, "feature_label_correlation.png")
+    feat_lab_result.value.plot(kind='bar', title='Feature-Label Correlation')
+    plt.savefig(feat_lab_plot_path)
+    print(f"Feature-Label Correlation plot saved to {feat_lab_plot_path}")
+    plt.clf()
+
     # Check for correlations > 0.9 in feature-label relationships
     for feature, value in feat_lab_result.value.items():
         if abs(value) > 0.9:
             raise ValueError(f"Feature-Label correlation exceeds 0.9 for feature: {feature}")
 
     # Check 2: Feature-Feature correlations
-    print("Running Feature-Feature Correlation check...")
     check_feat_feat = FeatureFeatureCorrelation()
     feat_feat_result = check_feat_feat.run(dataset=train_ds)
 
@@ -84,6 +90,15 @@ def validate_training_data(input_path, output_path):
     feat_feat_output = os.path.join(output_path, "feature_feature_correlation.csv")
     correlation_matrix.to_csv(feat_feat_output)
     print(f"Feature-Feature Correlation matrix saved to {feat_feat_output}")
+
+    # Plot Feature-Feature Correlation Heatmap
+    feat_feat_plot_path = os.path.join(output_path, "feature_feature_correlation_heatmap.png")
+    plt.figure(figsize=(10, 8))
+    sns.heatmap(correlation_matrix, annot=True, fmt=".2f", cmap="coolwarm", cbar=True)
+    plt.title("Feature-Feature Correlation Heatmap")
+    plt.savefig(feat_feat_plot_path)
+    print(f"Feature-Feature Correlation heatmap saved to {feat_feat_plot_path}")
+    plt.clf()
 
     # Check for correlations > 0.9 in feature-feature relationships
     np.fill_diagonal(correlation_matrix.values, 0)  # Exclude diagonal
