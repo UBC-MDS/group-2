@@ -56,11 +56,11 @@ python /scripts/validate_raw_data.py \
     --processed-data-path "./data/processed"
 
 # script3: data read and split
+
+# script4: training data validation
 python ./scripts/validate_training_data.py \
     --input-path "./data/processed/training_set.csv" \
     --output-path "./results"
-
-# script4: training data validation
 
 # script5: EDA
 
