@@ -1,7 +1,5 @@
 ---
 title: Analysis of Wine Quality and Prediction Using Logistic Regression
-execute:
-  echo: false
 author: "Alix, Paramveer, Susannah, Zoe"
 date: "2024/12/08"
 format: 
@@ -18,17 +16,13 @@ execute:
   echo: false
   warning: false
 editor: source
-jupyter:
-  kernelspec:
-    display_name: 'Python [conda env:522] *'
-    language: python
-    name: conda-env-522-py
+jupyter: python3
 ---
 
 
 ```{python}
 from IPython.display import Markdown, display
-from tabulate import tabulate
+# from tabulate import tabulate
 
 import pandas as pd
 import numpy as np
@@ -131,7 +125,7 @@ The Logistic Regression algorithm was used to build a classification model to pr
 
 ```{python}
 # read data
-raw data = pd.read_csv('../data/raw/wine_quality.csv')
+raw_data = pd.read_csv('../data/raw/wine_quality.csv')
 
 # reorder columns
 raw_data['quality'] = raw_data.pop('quality')
