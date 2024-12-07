@@ -54,7 +54,7 @@ from data_validation import clean_data
 @click.option('--pipeline-to', type=str, help="Path to directory where the pipeline object will be written to")
 # @click.option('--plot-to', type=str, help="Path to directory where the plot will be written to")
 @click.option('--seed', type=int, help="Random seed", default=522)
-def main(training_data, preprocessor, columns_to_drop, pipeline_to, plot_to, seed):
+def model_and_result(training_data, preprocessor, columns_to_drop, pipeline_to, plot_to, seed):
     '''Fits a breast cancer classifier to the training data 
     and saves the pipeline object.'''
     np.random.seed(seed)
@@ -110,7 +110,7 @@ def main(training_data, preprocessor, columns_to_drop, pipeline_to, plot_to, see
     accuracy_score(y_test, y_pred)
 
 if __name__ == '__main__':
-    main()
+    model_and_result()
 # -
 
 

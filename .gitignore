@@ -162,4 +162,5 @@ cython_debug/
 #.idea/
 
 .bash_history
-.jupyter/lab/workspaces/default-37a8.jupyterlab-workspace
+.jupyter/
+.local/
