@@ -45,19 +45,18 @@ warnings.filterwarnings('ignore', category=FutureWarning)
 # import pandera as pa
 
 @click.command()
-@click.option('--training-data', type=str, help="Path to training data")
-@click.option('--test-data', type=str, help="Path to test data")
+@click.option('--training_data', type=str, help="Path to training data")
+@click.option('--test_data', type=str, help="Path to test data")
 # @click.option('--preprocessor_to', type=str, help="Path to preprocessor object")
 # @click.option('--columns-to-drop', type=str, help="Optional: columns to drop")
 # @click.option('--data-to', type=str, help="Path to directory where processed data will be written to")
 # @click.option('--pipeline-to', type=str, help="Path to directory where the pipeline object will be written to")
 # @click.option('--plot-to', type=str, help="Path to directory where the plot will be written to")
 @click.option('--seed', type=int, help="Random seed", default=522)
-def model_and_result(training_data, test_data, preprocessor_to, columns_to_drop, pipeline_to, plot_to, data_to, seed):
+def model_and_result(training_data, test_data, seed):
     '''Fits a wine quality logistic regression model to the training data 
     and evaluates the model on the test data with accuracy score.'''
     np.random.seed(seed)
-    set_config(transform_output="pandas")
 
     # Read in training and test data
     train_df = pd.read_csv(training_data)

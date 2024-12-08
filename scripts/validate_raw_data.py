@@ -11,18 +11,18 @@ import pandera as pa
 
 @click.command()
 @click.option(
-    "--input-path",
+    "--input_path",
     default="./data/raw/wine_quality.csv",
     help="Path to the input CSV file.",
     type=click.Path(exists=True, dir_okay=False),
 )
 @click.option(
-    "--processed-data-path",
+    "--processed_data_path",
     default="./data/processed",
     help="Path to save the processed data.",
     type=click.Path(file_okay=False),
 )
-def validate_raw_data(input_path, processed_data_path, seed):
+def validate_raw_data(input_path, processed_data_path):
     """
     Script to validate and clean wine quality data.
     Validate the raw data is step 1 of data validation done by pandera before data splitting. 
