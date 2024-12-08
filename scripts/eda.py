@@ -12,7 +12,7 @@ import click
 @click.argument("output_dir", type=click.Path())
 def eda(input_data, output_dir):
     """
-    Perform EDA as described in the provided notebook and save the results.
+    Perform EDA on training data and save the results.
 
     INPUT_DATA: Path to the input dataset (CSV file).
     OUTPUT_DIR: Directory to save the results (charts and analysis).
@@ -72,7 +72,11 @@ def eda(input_data, output_dir):
     print(f"1.2 Line chart saved to {line_chart_path}")
 
     ## 1.3 Correlation matrix
-    aly.corr(train_df)
+    feature_corr = aly.corr(train_df)
+    feature_corr_path = os.path.join(output_dir, "feature_corrs.png")
+    feature_corr.save(feature_corr_path, ppi=200)
+    print(f"1.3 Feature correlation chart saved to {feature_corr_path}")
+
     ### Create scatter plot with regression line
     scatter_chart = alt.Chart(train_df[['free_sulfur_dioxide', 'total_sulfur_dioxide']].sample(600)).mark_circle().encode(
         x='free_sulfur_dioxide',
@@ -90,8 +94,8 @@ def eda(input_data, output_dir):
         'total_sulfur_dioxide'
     )
 
-    scatter_chart_path = os.path.join(output_dir, "feature_corrs.png")
-    scatter_chart.save(scatter_chart_path)
+    scatter_chart_path = os.path.join(output_dir, "total_vs_free_sulfur_dioxide.png")
+    scatter_chart.save(scatter_chart_path, ppi=200)
     print(f"1.3 Scatter correlation chart saved to {scatter_chart_path}")
 
     ## 1.4 Outlier detection

@@ -1,9 +1,11 @@
 # Analysis of Wine Quality and Prediction Using Logistic Regression
 
-## Author:
+## Author
+
 Alix, Paramveer, Susannah, Zoe
 
 ## About
+
 This analysis investigates the relationship between physicochemical properties and wine quality using the Wine Quality dataset from the UCI Machine Learning Repository, containing data for both red and white wine. Through comprehensive exploratory data analysis, we examined 11 physicochemical features and their correlations with wine quality scores. Our analysis revealed that higher quality wines typically have higher alcohol content and lower volatile acidity, with white wines generally receiving higher quality scores than red wines. Most features showed right-skewed distributions with notable outliers, particularly in sulfur dioxide and residual sugar measurements. The quality scores themselves followed a normal distribution centered around scores 5-6.
 
 We implemented a logistic regression model with standardized features and one-hot encoded categorical variables, using randomized search cross-validation to optimize the regularization parameter. The final model achieved an accuracy of 52.4% on the test set. While this performance suggests room for improvement, the analysis provides valuable insights for future research directions.
@@ -13,7 +15,8 @@ The dataset used in this project is the Wine Quality dataset from the UCI Machin
 Due to privacy and logistic issues, only physicochemical (inputs) and sensory (the output) variables are available (e.g. there is no data about grape types, wine brand, wine selling price, etc.).
 
 ## Report
-The final report can be found here: *PUT LINK HERE*
+
+The final report can be found [here](https://github.com/UBC-MDS/wine-quality-regressor-group-2/blob/main/reports/wine_quality_regressor_report.html)
 
 ## Dependencies
 
@@ -47,28 +50,39 @@ The final report can be found here: *PUT LINK HERE*
 
 3. To run the analysis, enter the following commands in the terminal in the project root:
 
-```
+```bash
 # script1: download data
+python ./scripts/data_download.py \
+    --id=186 \
+    --raw_data_out=./data/raw
 
 # script2: raw data validation
-python /scripts/validate_raw_data.py \
-    --input-path "./data/raw/wine_quality.csv" \
-    --processed-data-path "./data/processed"
+python ./scripts/validate_raw_data.py \
+    --input_path "./data/raw/wine_quality.csv" \
+    --processed_data_path "./data/processed"
 
-# script3: data read and split
+#script3: read data
+python ./scripts/read_data.py \
+    ./data/raw/wine_quality.csv \
+    ./data/processed \
+    --seed=522 \
+    --test_size=0.2
 
-# script4: training data validation
-python ./scripts/validate_training_data.py \
-    --input-path "./data/processed/training_set.csv" \
-    --output-path "./results"
+# script4: EDA
+python ./scripts/eda.py \
+    ./data/processed/training_set.csv \
+    ./results/figures
 
-# script5: EDA
+# script5: model and result
+python ./scripts/model_and_results.py \
+    --training_data ./data/processed/training_set.csv \
+    --test_data ./data/processed/test_set.csv \
+    --results_to ./results/tables/ \
+    --seed=522
 
-# script6: model and result
-
-# build HTML report and copy build to docs folder
-jupyter-book build report
-cp -r report/_build/html/* docs
+# Render reports using Quarto
+quarto render ./reports/wine_quality_regressor_report.qmd --to pdf
+quarto render ./reports/wine_quality_regressor_report.qmd --to html
 ```
 
 ### Clean up
