@@ -79,6 +79,7 @@ python ./scripts/eda.py \
 python ./scripts/model_and_results.py \
     --training_data ./data/processed/training_set.csv \
     --test_data ./data/processed/test_set.csv \
+    --results_to ./results/tables/ \
     --seed=522
 
 # Render reports using Quarto
