@@ -29,19 +29,11 @@ jupyter:
     name: conda-env-522-py
 ---
 
-````{python}
-```{python}
-import pandas as pd
-results_df = pd.read_csv("../results/tables/model_results.csv").round(2)
-accuracy_percentage = results_df['accuracy'].values[0] * 100
-```
-````
-
 ## Summary
 
 This analysis investigates the relationship between physicochemical properties and wine quality using the Wine Quality dataset from the UCI Machine Learning Repository, containing data for both red and white wine. Through comprehensive exploratory data analysis, we examined 11 physicochemical features and their correlations with wine quality scores. Our analysis revealed that higher quality wines typically have higher alcohol content and lower volatile acidity, with white wines generally receiving higher quality scores than red wines. Most features showed right-skewed distributions with notable outliers, particularly in sulfur dioxide and residual sugar measurements. The quality scores themselves followed a normal distribution centered around scores 5-6.
 
-We implemented a logistic regression model with standardized features and one-hot encoded categorical variables, using randomized search cross-validation to optimize the regularization parameter. The final model achieved an accuracy of `{python} accuracy_percentage`% on the test set. While this performance suggests room for improvement, the analysis provides valuable insights for future research directions.
+We implemented a logistic regression model with standardized features and one-hot encoded categorical variables, using randomized search cross-validation to optimize the regularization parameter. The final model achieved an accuracy of 53.7% on the test set. While this performance suggests room for improvement, the analysis provides valuable insights for future research directions.
 
 ## Introduction
 
@@ -110,6 +102,13 @@ The Logistic Regression algorithm was used to build a classification model to pr
 
 ## Results and Discussion
 
+````{python}
+```{python}
+import pandas as pd
+results_df = pd.read_csv("../results/tables/model_results.csv").round(2)
+```
+````
+
 We split and transform the data (i.e. wine color into binary variable and using standard scalers for all other features) and build our logistic regression model. Using RandomSearchCV, we find the best hyperparamter C for the model: `{python} results_df['best_C'].values[0]`.
 
 With our tuned model using the best C hyperparameter, we find the accuracy score of our predictions, comparing them to actual wine quality in the test set to be `{python} results_df['accuracy'].values[0]`.
@@ -117,3 +116,4 @@ With our tuned model using the best C hyperparameter, we find the accuracy score
 While the performance of this model is not likely very useful in predicting wine quality, as we observed an accuracy score of `{python} results_df['accuracy'].values[0]`, we gained insights on directions that could be further explored. First, we chose logistic regression as it is an intuitive first-step to approach a dataset with largely numeric features representing measurements of contents inside wines. Therefore, further analysis inspecting presence of linear relationships can be conducted using logistic regression results. We can then propose another model, e.g.Tree-based ones like Random Forest, to see whether it does better in wine quality prediction should there be weak linear relationships observed. Second, data cleaning might benefit our decision in choosing an optimal model as outliers have been widely observed across many features, according to our EDA in the previous section. It might be worth it to understand what all features represent and apply human knowledge to modify and "treat" the data so that it is more suitable for training than how it is currently presented. This involves speaking with professionals that understand wine makeup and qualities and seek their insights on reasons of outlier presence and their indications. We believe conducting the above two next-steps will give us a better knowledge foundation in order for us to choose a model that performs better in the future.
 
 ## References
+
