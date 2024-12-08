@@ -1,28 +1,28 @@
 # Analysis of Wine Quality and Prediction Using Logistic Regression
 
-## Contributors:
+## Author:
 Alix, Paramveer, Susannah, Zoe
 
-## Project Summary:
-This project aims to analyze and predict the quality of wine based on various physicochemical properties. Using the UCI Wine Quality dataset, we conduct data preprocessing, exploratory data analysis, and build machine learning models to predict wine quality. The dataset includes multiple features, such as acidity, alcohol content, and sugar levels, which are critical in determining the quality score of wines. The project utilizes cross-validation and hyperparameter tuning to optimize model performance.
+## About
+This analysis investigates the relationship between physicochemical properties and wine quality using the Wine Quality dataset from the UCI Machine Learning Repository, containing data for both red and white wine. Through comprehensive exploratory data analysis, we examined 11 physicochemical features and their correlations with wine quality scores. Our analysis revealed that higher quality wines typically have higher alcohol content and lower volatile acidity, with white wines generally receiving higher quality scores than red wines. Most features showed right-skewed distributions with notable outliers, particularly in sulfur dioxide and residual sugar measurements. The quality scores themselves followed a normal distribution centered around scores 5-6.
 
-## Data Analysis:
-Dataset:
-The dataset was sourced from the UCI Machine Learning Repository.
+We implemented a logistic regression model with standardized features and one-hot encoded categorical variables, using randomized search cross-validation to optimize the regularization parameter. The final model achieved an accuracy of 52.4% on the test set. While this performance suggests room for improvement, the analysis provides valuable insights for future research directions.
 
-Preprocessing:
-Standardization of numerical features.
-One-hot encoding for binary categorical features (e.g., color).
+The dataset used in this project is the Wine Quality dataset from the UCI Machine Learning Repository (Cortez et al. 2009) and can be found [here](https://archive.ics.uci.edu/dataset/186/wine+quality.) These datasets are related to red and white variants of the Portuguese “Vinho Verde” wine. They contains physicochemical properties (e.g., acidity, sugar content, and alcohol) of different wine samples, alongside a sensory score representing the quality of the wine, rated by experts on a scale from 0 to 10. Each row in the dataset represents a wine sample, with the columns detailing 11 physicochemical attributes and the quality score. The classes are ordered and not balanced (e.g. there are many more normal wines than excellent or poor ones).
 
-Exploratory Data Analysis:
-Distribution of wine quality scores.
-Correlation heatmaps to identify relationships between features.
-Key insights on influential features.
+Due to privacy and logistic issues, only physicochemical (inputs) and sensory (the output) variables are available (e.g. there is no data about grape types, wine brand, wine selling price, etc.).
 
-Modeling:
-Logistic regression was used as the base model.
-RandomizedSearchCV was applied for hyperparameter optimization.
-The model was evaluated using metrics such as accuracy, precision, recall, and F1-score.
+## Report
+The final report can be found here: *PUT LINK HERE*
+
+## Dependencies
+
+- `conda` (version 24.9.1 or higher)
+- `conda-lock` (version 2.5.7 or higher)
+- Python package `ucimlrepo` (version 0.0.7)
+- `jupyterlab` (version 4.2.0 or higher)
+- `nb_conda_kernels` (version 2.5.1 or higher)
+- Python and packages listed in [`environment.yml`](https://github.com/UBC-MDS/wine-quality-regressor-group-2/blob/main/environment.yml)
 
 ## Usage
 
@@ -45,41 +45,62 @@ The model was evaluated using metrics such as accuracy, precision, recall, and F
 
 2. In the terminal, look for the Jupyter Lab link which starts with `http://127.0.0.1:8888/`. Copy and paste the URL into the browser to open up Jupyter Lab.
 
-3. To run the analysis, open the notebook from `notebooks/wine_quality.ipynb` in this new Jupyter Lab session and in the "Kernel" menu, click "Restart Kernel and Run All".
+3. To run the analysis, enter the following commands in the terminal in the project root:
 
-#### Alternative way to run the analysis
+```
+# script1: download data
 
-If the above instructions fail to work, the user can download the packages locally using the provided `environment.yml` file and create a conda environment.
+# script2: raw data validation
+python /scripts/validate_raw_data.py \
+    --input-path "./data/raw/wine_quality.csv" \
+    --processed-data-path "./data/processed"
 
-1. In the root directory of the project, run the following command in a bash terminal to create a conda environment named `522`:
+# script3: data read and split
 
-    ```bash
-    conda env create -f environment.yml
-    ```
+# script4: training data validation
+python ./scripts/validate_training_data.py \
+    --input-path "./data/processed/training_set.csv" \
+    --output-path "./results"
 
-2. Activate the conda environment using the following command:
+# script5: EDA
 
-    ```bash
-    conda activate 522
-    ```
+# script6: model and result
 
-3. Run Jupyter Lab using the following command:
-
-    ```bash
-    jupyter lab
-    ```
-
-4. Once the Jupyter Lab session starts, navigate to the appropriate URL (`http://127.0.0.1:8888/`) and open the notebook from `notebooks/wine_quality.ipynb`, select the `522` kernel and run all the cells.
+# build HTML report and copy build to docs folder
+jupyter-book build report
+cp -r report/_build/html/* docs
+```
 
 ### Clean up
 
 Hit `Ctrl + C` in the terminal to end the Jupyter Lab session. Run the following command after the session ends to free up the resources used by Docker: `docker compose rm`.
 
-## List of Dependencies
+### Developer notes
 
-- `conda` (version 24.9.1 or higher)
-- `conda-lock` (version 2.5.7 or higher)
-- Python package `ucimlrepo` (version 0.0.7)
-- `jupyterlab` (version 4.2.0 or higher)
-- `nb_conda_kernels` (version 2.5.1 or higher)
-- Python and packages listed in [`environment.yml`](https://github.com/UBC-MDS/wine-quality-regressor-group-2/blob/main/environment.yml)
+Please see CONTRIBUTING.md.
+
+### License
+
+Please see License.
+
+### References
+
+<div id="refs" class="references hanging-indent">
+
+<div id="ref-Jain2023">
+Jain, K., Kaushik, K., Gupta, S. K., & Others. 2023. "Machine learning-based predictive modelling for the enhancement of wine quality." *Scientific Reports*, 13:17042. <https://doi.org/10.1038/s41598-023-44111-9>.
+</div>
+
+<div id="ref-Cortez2009">
+Cortez, P., Cerdeira, A., Almeida, F., Matos, T., & Reis, J. 2009. "Wine Quality [Dataset]." *UCI Machine Learning Repository*. <https://doi.org/10.24432/C56S3T>.
+</div>
+
+<div id="ref-Kniazieva2023">
+Kniazieva, Y. 2023, October 12. "A digital sommelier: Machine learning for wine quality prediction." *Label Your Data*. <https://labelyourdata.com/articles/machine-learning-for-wine-quality-prediction>.
+</div>
+
+<div id="ref-Aich2018">
+Aich, S., Al-Absi, A. A., Hui, K. L., Lee, J. T., & Sain, M. 2018. "A classification approach with different feature sets to predict the quality of different types of wine using machine learning techniques." In *International Conference on Advanced Communication Technology (ICACT)*, pp. 139–143. <https://doi.org/10.23919/ICACT.2018.8323674>.
+</div>
+
+</div>
