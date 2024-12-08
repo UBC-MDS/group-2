@@ -26,7 +26,6 @@ import pandas as pd
 # from ucimlrepo import fetch_ucirepo 
 # from sklearn.model_selection import train_test_split
 
-from sklearn import set_config
 from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.compose import make_column_transformer
@@ -58,7 +57,6 @@ def model_and_result(training_data, test_data, results_to, seed):
     '''Fits a wine quality logistic regression model to the training data 
     and evaluates the model on the test data with accuracy score.'''
     np.random.seed(seed)
-    set_config(transform_output="pandas")
 
     # Read in training and test data
     train_df = pd.read_csv(training_data)
