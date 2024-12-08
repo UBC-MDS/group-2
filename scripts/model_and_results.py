@@ -116,7 +116,7 @@ def model_and_result(training_data, test_data, results_to, seed):
     test_acc = accuracy_score(y_test, y_pred)
 
     # Save best parameter and accuracy scores
-    model_results = pd.DataFrame({'best_C': [random_search.best_params_], 'accuracy': [test_acc]})
+    model_results = pd.DataFrame({'best_C': [random_search.best_params_['logisticregression__C']], 'accuracy': [test_acc]})
     model_results.to_csv(os.path.join(results_to, "model_results.csv"), index=False)
 
 if __name__ == '__main__':

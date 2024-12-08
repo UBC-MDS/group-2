@@ -1,9 +1,11 @@
 # Analysis of Wine Quality and Prediction Using Logistic Regression
 
-## Author:
+## Author
+
 Alix, Paramveer, Susannah, Zoe
 
 ## About
+
 This analysis investigates the relationship between physicochemical properties and wine quality using the Wine Quality dataset from the UCI Machine Learning Repository, containing data for both red and white wine. Through comprehensive exploratory data analysis, we examined 11 physicochemical features and their correlations with wine quality scores. Our analysis revealed that higher quality wines typically have higher alcohol content and lower volatile acidity, with white wines generally receiving higher quality scores than red wines. Most features showed right-skewed distributions with notable outliers, particularly in sulfur dioxide and residual sugar measurements. The quality scores themselves followed a normal distribution centered around scores 5-6.
 
 We implemented a logistic regression model with standardized features and one-hot encoded categorical variables, using randomized search cross-validation to optimize the regularization parameter. The final model achieved an accuracy of 52.4% on the test set. While this performance suggests room for improvement, the analysis provides valuable insights for future research directions.
@@ -13,7 +15,8 @@ The dataset used in this project is the Wine Quality dataset from the UCI Machin
 Due to privacy and logistic issues, only physicochemical (inputs) and sensory (the output) variables are available (e.g. there is no data about grape types, wine brand, wine selling price, etc.).
 
 ## Report
-The final report can be found here: *PUT LINK HERE*
+
+The final report can be found [here](https://github.com/UBC-MDS/wine-quality-regressor-group-2/blob/main/reports/wine_quality_regressor_report.html)
 
 ## Dependencies
 
