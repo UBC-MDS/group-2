@@ -47,14 +47,14 @@ The final report can be found here: *PUT LINK HERE*
 
 3. To run the analysis, enter the following commands in the terminal in the project root:
 
-```
+```bash
 # script1: download data
-python /scripts/data_download.py \
+python ./scripts/data_download.py \
     --id=186
     --raw_data_out="./data/raw"
 
 # script2: raw data validation
-python /scripts/validate_raw_data.py \
+python ./scripts/validate_raw_data.py \
     --input-path "./data/raw/wine_quality.csv" \
     --processed-data-path "./data/processed"
     --seed=522
@@ -82,9 +82,9 @@ python ./scripts/model_and_results.py \
     --test-data "./data/processed/test_set.csv"
     --seed=522
 
-# build HTML report and copy build to docs folder
-jupyter-book build report
-cp -r report/_build/html/* docs
+# Render reports using Quarto
+quarto render ./reports/wine_quality_regressor_report.qmd --to pdf
+quarto render ./reports/wine_quality_regressor_report.qmd --to html
 ```
 
 ### Clean up
