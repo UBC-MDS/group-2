@@ -70,6 +70,7 @@ python ./scripts/eda.py \
 python ./scripts/model_and_results.py \
     --training-data "./data/processed/training_set.csv"
     --test-data "./data/processed/test_set.csv"
+    --seed=522
 
 # build HTML report and copy build to docs folder
 jupyter-book build report
