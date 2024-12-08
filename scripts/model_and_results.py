@@ -54,8 +54,8 @@ warnings.filterwarnings('ignore', category=FutureWarning)
 # @click.option('--plot-to', type=str, help="Path to directory where the plot will be written to")
 # @click.option('--seed', type=int, help="Random seed", default=522)
 def model_and_result(training_data, test_data, preprocessor_to, columns_to_drop, pipeline_to, plot_to, data_to, seed):
-    '''Fits a breast cancer classifier to the training data 
-    and saves the pipeline object.'''
+    '''Fits a wine quality logistic regression model to the training data 
+    and evaluates the model on the test data with accuracy score.'''
     np.random.seed(seed)
     set_config(transform_output="pandas")
 

@@ -54,17 +54,22 @@ The final report can be found here: *PUT LINK HERE*
 python /scripts/validate_raw_data.py \
     --input-path "./data/raw/wine_quality.csv" \
     --processed-data-path "./data/processed"
+    --seed=522
 
-# script3: data read and split
-
-# script4: training data validation
+# script3: training data validation
 python ./scripts/validate_training_data.py \
     --input-path "./data/processed/training_set.csv" \
     --output-path "./results"
 
-# script5: EDA
+# script4: EDA
+python ./scripts/eda.py \
+    --input-data "./data/processed/training_set.csv" \
+    --output-dir "./results/figures"
 
-# script6: model and result
+# script5: model and result
+python ./scripts/model_and_results.py \
+    --training-data "./data/processed/training_set.csv"
+    --test-data "./data/processed/test_set.csv"
 
 # build HTML report and copy build to docs folder
 jupyter-book build report
