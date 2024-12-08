@@ -49,6 +49,9 @@ The final report can be found here: *PUT LINK HERE*
 
 ```
 # script1: download data
+python /scripts/data_download.py \
+    --id=186
+    --raw_data_out="./data/raw"
 
 # script2: raw data validation
 python /scripts/validate_raw_data.py \
@@ -60,6 +63,13 @@ python /scripts/validate_raw_data.py \
 python ./scripts/validate_training_data.py \
     --input-path "./data/processed/training_set.csv" \
     --output-path "./results"
+
+#script4: read data
+python ./scripts/read_data.py \
+    --raw_data_path "./data/raw/wine_quality.csv"
+    --processed_data_path "./data/processed"
+    --seed=522
+    --test_size=0.2
 
 # script4: EDA
 python ./scripts/eda.py \

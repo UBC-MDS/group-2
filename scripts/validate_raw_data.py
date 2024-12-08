@@ -75,13 +75,6 @@ def validate_raw_data(input_path, processed_data_path, seed):
     print(f"Processed data saved to {output_file}")
     print(f"Data validation step 1 is done.")
 
-    # Split training and testing data
-    train_df, test_df = train_test_split(clean_data, test_size=0.2, random_state=seed)
-    
-    # Store split data in data folder
-    train_df.to_csv('../data/processed/training_set.csv', index=False)
-    test_df.to_csv('../data/processed/test_set.csv', index=False)
-
 
 if __name__ == "__main__":
     validate_raw_data()
