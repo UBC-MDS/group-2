@@ -50,36 +50,35 @@ The final report can be found here: *PUT LINK HERE*
 ```bash
 # script1: download data
 python ./scripts/data_download.py \
-    --id=186
-    --raw_data_out="./data/raw"
+    --id=186 \
+    --raw_data_out=./data/raw
 
 # script2: raw data validation
 python ./scripts/validate_raw_data.py \
-    --input-path "./data/raw/wine_quality.csv" \
-    --processed-data-path "./data/processed"
-    --seed=522
+    --input_path "./data/raw/wine_quality.csv" \
+    --processed_data_path "./data/processed"
 
 # script3: training data validation
 python ./scripts/validate_training_data.py \
-    --input-path "./data/processed/training_set.csv" \
-    --output-path "./results"
+    --input_path "./data/processed/training_set.csv" \
+    --output_path "./results"
 
 #script4: read data
 python ./scripts/read_data.py \
-    --raw_data_path "./data/raw/wine_quality.csv"
-    --processed_data_path "./data/processed"
-    --seed=522
+    ./data/raw/wine_quality.csv \
+    ./data/processed \
+    --seed=522 \
     --test_size=0.2
 
 # script4: EDA
 python ./scripts/eda.py \
-    --input-data "./data/processed/training_set.csv" \
-    --output-dir "./results/figures"
+    ./data/processed/training_set.csv \
+    ./results/figures
 
 # script5: model and result
 python ./scripts/model_and_results.py \
-    --training-data "./data/processed/training_set.csv"
-    --test-data "./data/processed/test_set.csv"
+    --training_data ./data/processed/training_set.csv \
+    --test_data ./data/processed/test_set.csv \
     --seed=522
 
 # Render reports using Quarto
