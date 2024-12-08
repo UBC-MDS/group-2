@@ -1,5 +1,5 @@
 # Run by following command: python scripts/script_eda.py
-## or specify other directory: python scripts/script_eda.py --input_path ./data/processed/training_set.csv --output_dir ./results/figures
+## or specify other directory: python scripts/script_eda.py --input_path ./data/processed/training_set.csv --output_dir ./script/output/
 
 import pandas as pd
 import altair as alt
@@ -16,7 +16,7 @@ import click
 )
 @click.option(
     "--output_dir",
-    default="./results/figures",
+    default="./scripts/output/",
     help="Path to save the processed data and results.",
     type=click.Path(file_okay=False),
 )
