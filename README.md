@@ -16,7 +16,7 @@ Due to privacy and logistic issues, only physicochemical (inputs) and sensory (t
 
 ## Report
 
-The final report can be found [here](https://github.com/UBC-MDS/wine-quality-regressor-group-2/blob/main/reports/wine_quality_regressor_report.html)
+The final report can be found [here](https://github.com/UBC-MDS/wine-quality-regressor-group-2/blob/main/reports/wine_quality_regressor_report.pdf)
 
 ## Dependencies
 
