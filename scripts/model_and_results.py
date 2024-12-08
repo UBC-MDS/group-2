@@ -45,9 +45,9 @@ warnings.filterwarnings('ignore', category=FutureWarning)
 # import pandera as pa
 
 @click.command()
-@click.option('--training_data', type=str, help="Path to training data")
-@click.option('--test_data', type=str, help="Path to test data")
-@click.option('--results_to', type=str, help="Path to directory where the model's best parameter and accuracy score will be written to")
+@click.option('--training-data', type=str, help="Path to training data")
+@click.option('--test-data', type=str, help="Path to test data")
+@click.option('--results-to', type=str, help="Path to directory where the model's best parameter and accuracy score will be written to")
 # @click.option('--preprocessor_to', type=str, help="Path to preprocessor object")
 # @click.option('--columns-to-drop', type=str, help="Optional: columns to drop")
 # @click.option('--data-to', type=str, help="Path to directory where processed data will be written to")
@@ -58,12 +58,11 @@ def model_and_result(training_data, test_data, results_to, seed):
     '''Fits a wine quality logistic regression model to the training data 
     and evaluates the model on the test data with accuracy score.'''
     np.random.seed(seed)
+    set_config(transform_output="pandas")
 
     # Read in training and test data
     train_df = pd.read_csv(training_data)
     test_df = pd.read_csv(test_data)
-
-    os.makedirs(results_to, exist_ok=True)
     # cancer_preprocessor = pickle.load(open(preprocessor, "rb"))
 
 
@@ -113,10 +112,13 @@ def model_and_result(training_data, test_data, results_to, seed):
 
     # Evaluate
     y_pred = random_search.predict(X_test)
-    test_acc = accuracy_score(y_test, y_pred)
+    score = accuracy_score(y_test, y_pred)
+
+    # Ensure the specified directories exist
+    os.makedirs(results_to, exist_ok=True)
 
     # Save best parameter and accuracy scores
-    model_results = pd.DataFrame({'best_C': [random_search.best_params_], 'accuracy': [test_acc]})
+    model_results = pd.DataFrame({'best_C': [random_search.best_params_], 'accuracy': [score]})
     model_results.to_csv(os.path.join(results_to, "model_results.csv"), index=False)
 
 if __name__ == '__main__':
