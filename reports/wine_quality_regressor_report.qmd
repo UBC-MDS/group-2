@@ -1,0 +1,214 @@
+---
+title: Analysis of Wine Quality and Prediction Using Logistic Regression
+author: "Alix, Paramveer, Susannah, Zoe"
+date: "2024/12/08"
+format: 
+    html:
+        toc: true
+        toc-depth: 4
+        toc-title: Contents
+    pdf:
+        toc: true
+        toc-depth: 4
+        toc-title: Contents
+bibliography: references.bib
+execute:
+  echo: false
+  warning: false
+editor: source
+jupyter: python3
+---
+
+
+```{python}
+from IPython.display import Markdown, display
+# from tabulate import tabulate
+
+import pandas as pd
+import numpy as np
+from ucimlrepo import fetch_ucirepo 
+from sklearn.model_selection import train_test_split
+import altair as alt
+import altair_ally as aly
+
+from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.compose import make_column_transformer
+from sklearn.pipeline import make_pipeline
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import classification_report
+from sklearn.model_selection import StratifiedKFold
+
+from sklearn.model_selection import RandomizedSearchCV
+import scipy.stats as stats
+
+from sklearn.metrics import accuracy_score
+
+import warnings
+warnings.filterwarnings('ignore', category=FutureWarning)
+import os
+import pandera as pa
+```
+
+## Summary
+
+This analysis investigates the relationship between physicochemical properties and wine quality using the Wine Quality dataset from the UCI Machine Learning Repository, containing data for both red and white wine. Through comprehensive exploratory data analysis, we examined 11 physicochemical features and their correlations with wine quality scores. Our analysis revealed that higher quality wines typically have higher alcohol content and lower volatile acidity, with white wines generally receiving higher quality scores than red wines. Most features showed right-skewed distributions with notable outliers, particularly in sulfur dioxide and residual sugar measurements. The quality scores themselves followed a normal distribution centered around scores 5-6.
+
+We implemented a logistic regression model with standardized features and one-hot encoded categorical variables, using randomized search cross-validation to optimize the regularization parameter. The final model achieved an accuracy of 53.7% on the test set. While this performance suggests room for improvement, the analysis provides valuable insights for future research directions.
+
+## Introduction
+
+The quality of wine is influenced by various chemical properties and sensory factors that determine its taste, aroma, and overall acceptability. Here, we aim to predict the quality of wine using a publicly available wine quality dataset. Machine learning-based predictive modeling is commonly used in the field of wine quality to identify patterns and relationships in key features such as alcohol, sulfates, and volatile acidity, which are critical factors impacting wine quality (@jain2023). By applying machine learning model, we seek to enhance the accuracy of wine quality predictions and contribute to the advancement of data-driven approaches in wine evaluation methodologies.
+
+## Methods
+
+### Data
+
+The dataset used in this project is the Wine Quality dataset from the UCI Machine Learning Repository (@cortez2009) and can be found here: https://archive.ics.uci.edu/dataset/186/wine+quality. These datasets are related to red and white variants of the Portuguese "Vinho Verde" wine. They contains physicochemical properties (e.g., acidity, sugar content, and alcohol) of different wine samples, alongside a sensory score representing the quality of the wine, rated by experts on a scale from 0 to 10. Each row in the dataset represents a wine sample, with the columns detailing 11 physicochemical attributes and the quality score. The classes are ordered and not balanced (e.g. there are many more normal wines than excellent or poor ones).
+
+Due to privacy and logistic issues, only physicochemical (inputs) and sensory (the output) variables are available (e.g. there is no data about grape types, wine brand, wine selling price, etc.).
+
+#### 1.EDA
+
+**1.1 Distribution of quality scores across numerical features**
+
+![Distribution of wine quality scores by feature.](../results/figures/dist_wine_scores_by_feature.png){#fig-dist_wine_scores_by_feature width=100%}
+
+From the distribution plots in @dist_wine_scores_by_feature, we have the following findings:
+1. Higher quality wines tend to have higher alcohol content
+2. Higher quality wines generally have lower volatile acidity
+3. pH seems to have little discrimination power for quality (all quality levels overlap significantly)
+4. The `density` feature does not showing any meaningful relationship with wine quality
+
+**1.2 Distribution of quality scores by categorical feature (wine color)**
+
+![Comparison of red and white wine quality scores.](../results/figures/density_red_vs_white.png){#density_red_vs_white width=100%}
+
+@density_red_vs_white simply shows that white wine in average tends to have higher quality scores than red wine.
+
+**1.3 Correlation matrix**
+
+![Correlation matrix of all features.](../results/figures/feature_corrs.png){#feature_corrs width=100%}
+
+As @feature_corrs shows, it seems that the correlation between total sulfur dioxide and free sulfur dioxide is high, we might want to use one of them to represent the other. But let's see the scatter plot for these two features first.
+
+![Comparison of levels between total Sulfur Dioxide vs free Sulfur Dioxide.](../results/figures/total_vs_free_sulfur_dioxide.png){#total_vs_free_sulfur_dioxide width=100%}
+
+From the scatter plot in @total_vs_free_sulfur_dioxide, we can see that there is a positive linear correlation between between free and total sulfur dioxide, but the relationship is not perfectly linear. Since keeping both features would not make the model too complex, we will leave them both in the model for now.
+
+**1.4 Outlier detection**
+
+![Comparison of levels for all features between red and wine wines.](../results/figures/red_vs_white_all_features.png){#red_vs_white_all_features width=100%}
+
+From @red_vs_white_all_features, we have the following findings:
+
+1. Outliers:
+   - Many features show significant outliers
+   - Particularly noticeable in sulfur dioxide and residual sugar
+
+1. Distributions:
+   - Most features show right-skewed distributions
+   - pH shows relatively normal distribution for both types
+
+
+**1.5 The distribution of the target variable(quality)**
+
+![](../results/figures/dist_wine_scores.png){#dist_wine_scores width=100%}
+
+We can see from @dist_wine_scores our target variable has a normal distribution. The scores are centered around 5-6, with symmetric decreasing frequencies on both sides, forming a classic bell-shaped curve.
+
+### Analysis
+
+The Logistic Regression algorithm was used to build a classification model to predict the quality as an ordinal and numeric integer (found in the `quality` column of the data set). All variables included in the original data set, including wine color (i.e. red or white) were used to fit the model. Data was split with 80% being partitioned into the training set and 20% being partitioned into the test set. The hyperparameter C was chosen using 3-fold cross validation with the accuracy score as the classification metric. All variables were standardized just prior to model fitting. `color` column is converted to a single binary column with one hot encoding and its `drop='if_binary'` parameter.
+
+## Results and Discussion
+
+```{python}
+# read data
+raw_data = pd.read_csv('../data/raw/wine_quality.csv')
+
+# reorder columns
+raw_data['quality'] = raw_data.pop('quality')
+
+# validate data
+schema = pa.DataFrameSchema(
+    {
+        "color": pa.Column(str, pa.Check.isin(["red", "white"])),
+        "fixed_acidity": pa.Column(float, pa.Check.between(0, 16), nullable=True),
+        "volatile_acidity": pa.Column(float, pa.Check.between(0, 1.8), nullable=True),
+        "citric_acid": pa.Column(float, pa.Check.between(0, 1.4), nullable=True), 
+        "residual_sugar": pa.Column(float, pa.Check.between(0, 30), nullable=True),
+        "chlorides": pa.Column(float, pa.Check.between(0, 0.7), nullable=True),
+        "free_sulfur_dioxide": pa.Column(float, pa.Check.between(0, 160), nullable=True),
+        "total_sulfur_dioxide": pa.Column(float, pa.Check.between(0, 400), nullable=True),
+        "density": pa.Column(float, pa.Check.between(0, 1.5), nullable=True),
+        "pH": pa.Column(float, pa.Check.between(0, 5), nullable=True),
+        "sulphates": pa.Column(float, pa.Check.between(0, 2.5), nullable=True),
+        "alcohol": pa.Column(float, pa.Check.between(9, 15), nullable=True),
+        "quality": pa.Column(float, pa.Check.between(1, 10), nullable=True)
+    },
+    checks=[
+        pa.Check(lambda df: ~df.duplicated().any(), error="Duplicate rows found."),
+        pa.Check(lambda df: ~(df.isna().all(axis=1)).any(), error="Empty rows found.")
+    ],
+    drop_invalid_rows=True
+)
+
+clean_data = schema.validate(raw_data, lazy=True).drop_duplicates().dropna(how="all")
+
+# Split training and testing data
+train_df, test_df = train_test_split(clean_data, test_size=0.2, random_state=522)
+
+# Store split data in data folder
+train_df.to_csv('../data/processed/training_set.csv', index=False)
+test_df.to_csv('../data/processed/test_set.csv', index=False)
+
+# Split dataset
+X_train, X_test, y_train, y_test = (train_df.drop(columns='quality'), test_df.drop(columns='quality'),
+                                    train_df['quality'], test_df['quality']
+                                    )
+
+numeric_features = X_train.select_dtypes(include='number').columns.tolist()
+binary_features = ['color']
+
+# Make column transformer
+preprocessor = make_column_transformer(
+    (OneHotEncoder(drop='if_binary'), binary_features),
+    (StandardScaler(), numeric_features)
+)
+
+# Make pipeline using StandardScaler and LogisticRegression
+model = make_pipeline(
+    preprocessor,
+    LogisticRegression(multi_class='multinomial', solver='lbfgs', max_iter=2000)
+)
+
+# Define parameter distribution
+param_dist = {
+    'logisticregression__C': stats.uniform(0.001, 100),
+}
+
+# Perform randomized search
+random_search = RandomizedSearchCV(model, param_distributions=param_dist,
+                                   cv=3, # The least populated class in y has only 4 members, which is less than n_splits=5.
+                                   n_iter=50,
+                                   scoring='accuracy', random_state=42)
+random_search.fit(X_train, y_train)
+best_C = round(random_search.best_params_['logisticregression__C'], 3)
+```
+
+We split and transform the data (i.e. wine color into binary variable and using standard scalers for all other features) and build our logistic regression model. Using RandomSearchCV, we find the best hyperparamter C for the model: `{python} best_C`.
+
+```{python}
+# Evaluate
+y_pred = random_search.predict(X_test)
+score = round(accuracy_score(y_test, y_pred), 3)
+```
+
+With our tuned model using the best C hyperparameter, we find the accuracy score of our predictions, comparing them to actual wine quality in the test set to be `{python} score`.
+
+While the performance of this model is not likely very useful in predicting wine quality, as we observed an accuracy score of `{python} score`, we gained insights on directions that could be further explored. First, we chose logistic regression as it is an intuitive first-step to approach a dataset with largely numeric features representing measurements of contents inside wines. Therefore, further analysis inspecting presence of linear relationships can be conducted using logistic regression results. We can then propose another model, e.g.Tree-based ones like Random Forest, to see whether it does better in wine quality prediction should there be weak linear relationships observed. Second, data cleaning might benefit our decision in choosing an optimal model as outliers have been widely observed across many features, according to our EDA in the previous section. It might be worth it to understand what all features represent and apply human knowledge to modify and "treat" the data so that it is more suitable for training than how it is currently presented. This involves speaking with professionals that understand wine makeup and qualities and seek their insights on reasons of outlier presence and their indications. We believe conducting the above two next-steps will give us a better knowledge foundation in order for us to choose a model that performs better in the future.
+
+## References
+
+

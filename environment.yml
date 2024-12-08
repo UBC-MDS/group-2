@@ -24,6 +24,7 @@ dependencies:
   - quarto=1.5.57
   - vegafusion=1.6.9
   - vegafusion-python-embed=1.6.9
+  - quarto=1.5.57
   - pip:
       - altair-ally==0.1.1
       - deepchecks==0.18.1
