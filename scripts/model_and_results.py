@@ -45,9 +45,9 @@ warnings.filterwarnings('ignore', category=FutureWarning)
 # import pandera as pa
 
 @click.command()
-@click.option('--training-data', type=str, help="Path to training data")
-@click.option('--test-data', type=str, help="Path to test data")
-@click.option('--results-to', type=str, help="Path to directory where the model's best parameter and accuracy score will be written to")
+@click.option('--training_data', type=str, help="Path to training data")
+@click.option('--test_data', type=str, help="Path to test data")
+@click.option('--results_to', type=str, help="Path to directory where the model's best parameter and accuracy score will be written to")
 # @click.option('--preprocessor_to', type=str, help="Path to preprocessor object")
 # @click.option('--columns-to-drop', type=str, help="Optional: columns to drop")
 # @click.option('--data-to', type=str, help="Path to directory where processed data will be written to")
