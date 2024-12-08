@@ -62,6 +62,8 @@ def model_and_result(training_data, test_data, results_to, seed):
     # Read in training and test data
     train_df = pd.read_csv(training_data)
     test_df = pd.read_csv(test_data)
+
+    os.makedirs(results_to, exist_ok=True)
     # cancer_preprocessor = pickle.load(open(preprocessor, "rb"))
 
 
@@ -111,10 +113,10 @@ def model_and_result(training_data, test_data, results_to, seed):
 
     # Evaluate
     y_pred = random_search.predict(X_test)
-    accuracy_score(y_test, y_pred)
+    test_acc = accuracy_score(y_test, y_pred)
 
     # Save best parameter and accuracy scores
-    model_results = pd.DataFrame({'best_C': [random_search.best_params_], 'accuracy': [accuracy_score]})
+    model_results = pd.DataFrame({'best_C': [random_search.best_params_], 'accuracy': [test_acc]})
     model_results.to_csv(os.path.join(results_to, "model_results.csv"), index=False)
 
 if __name__ == '__main__':
