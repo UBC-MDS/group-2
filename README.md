@@ -58,12 +58,7 @@ python ./scripts/validate_raw_data.py \
     --input_path "./data/raw/wine_quality.csv" \
     --processed_data_path "./data/processed"
 
-# script3: training data validation
-python ./scripts/validate_training_data.py \
-    --input_path "./data/processed/training_set.csv" \
-    --output_path "./results"
-
-#script4: read data
+#script3: read data
 python ./scripts/read_data.py \
     ./data/raw/wine_quality.csv \
     ./data/processed \
