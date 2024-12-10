@@ -63,7 +63,7 @@ python ./scripts/validate_raw_data.py \
 
 #script3: read data
 python ./scripts/read_data.py \
-    ./data/raw/wine_quality.csv \
+    ./data/processed/cleaned_wine_quality.csv \
     ./data/processed \
     --seed=522 \
     --test_size=0.2
