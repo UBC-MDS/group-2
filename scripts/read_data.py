@@ -8,8 +8,8 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 
 @click.command()
-@click.argument('raw_data_path',
-                default='./data/raw/wine_quality.csv',
+@click.argument('cleaned_data_path',
+                default='./data/processed/cleaned_wine_quality.csv',
                 type=str)
 @click.argument('processed_data_path',
                 default='./data/processed',
@@ -22,14 +22,14 @@ from sklearn.model_selection import train_test_split
               default=0.2,
               type=float,
               help='Proportion of data to use in test set')
-def read_split_data(raw_data_path, processed_data_path, seed, test_size):
+def read_split_data(cleaned_data_path, processed_data_path, seed, test_size):
     """
-    Reads raw data from RAW_DATA_PATH and splits it into
+    Reads cleaned data from CLEANED_DATA_PATH and splits it into
     training and test sets and stores that at the folder
     specified by PROCESSED_DATA_PATH. The data will be output as
     training_set.csv and testing_set.csv
 
-    RAW_DATA_PATH is the relative path to the raw data CSV file.
+    CLEANED_DATA_PATH is the relative path to the validated data CSV file.
     PROCESSED_DATA_PATH is the relative path to the folder where split data is stored.
 
     By default, it reads from the data/raw folder and stores data splits in data/processed.
@@ -39,9 +39,9 @@ def read_split_data(raw_data_path, processed_data_path, seed, test_size):
     os.makedirs(processed_data_path, exist_ok=True)
 
     # Read data to split into training and test sets
-    raw_data = pd.read_csv(raw_data_path)
+    cleaned_data = pd.read_csv(cleaned_data_path)
 
-    train_df, test_df = train_test_split(raw_data, test_size=test_size, random_state=seed)
+    train_df, test_df = train_test_split(cleaned_data, test_size=test_size, random_state=seed)
 
     # Store the training and test sets
     train_df.to_csv(os.path.join(processed_data_path, 'training_set.csv'), index=False)
