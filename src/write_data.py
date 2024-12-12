@@ -7,5 +7,5 @@
 import pandas as pd
 import os
 
-def write_data(dataframe: pd.DataFrame, path: str, filename: str) -> int:
+def write_data(dataframe: pd.DataFrame, path: str, filename: str):
     pass

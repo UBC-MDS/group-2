@@ -43,10 +43,6 @@ def test_write_data_success():
 
     status = write_data(simple_dataframe, PATH, filename)
     
-    # Test if the returned value was int and was successful
-    assert isinstance(status, int), 'Did not return integer'
-    assert status == 0, 'CSV write has failed!'
-
     # Test if the file was created and named correctly
     file_path = os.path.join(PATH, filename)
     assert os.path.isfile(file_path)
@@ -60,10 +56,6 @@ def test_write_data_dtypes_success():
     filename = 'multi_type_dataframe.csv'
 
     status = write_data(multi_type_dataframe, PATH, filename)
-
-    # Test if the returned value was int and was succesful
-    assert isinstance(status, int), 'Did not return integer'
-    assert status == 0, 'CSV write has failed!'
 
     # Test if the file was created and named correctly
     file_path = os.path.join(PATH, filename)
