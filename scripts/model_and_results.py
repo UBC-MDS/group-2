@@ -90,7 +90,7 @@ def model_and_result(training_data, test_data, results_to, seed):
         LogisticRegression(multi_class='multinomial', solver='lbfgs', max_iter=2000)
     )
 
-    # Find best performing model through randomized search
+    # Find best performing model through randomized search and fit it using X_train and y_train
     random_search = find_best_model(X_train, y_train, model, stats.uniform(0.001, 100), 3, 50, 'accuracy', 42)
     
     # random_search.fit(X_train, y_train)
