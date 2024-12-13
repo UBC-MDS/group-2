@@ -14,6 +14,8 @@ REPORT_PDF = reports/wine_quality_regressor_report.pdf
 
 .PHONY: all clean
 
+all: $(REPORT_HTML) $(REPORT_PDF)
+
 # script1: download data - save raw data
 $(DATA_RAW): ./scripts/data_download.py
 	$(PYTHON) ./scripts/data_download.py \
@@ -56,8 +58,6 @@ $(REPORT_HTML): $(PLOTS) $(RESULTS) $(REFERENCES) ./reports/wine_quality_regress
 	$(QUARTO) render ./reports/wine_quality_regressor_report.qmd --to html
 $(REPORT_PDF): $(PLOTS) $(RESULTS) $(REFERENCES) ./reports/wine_quality_regressor_report.qmd
 	$(QUARTO) render ./reports/wine_quality_regressor_report.qmd --to pdf
-
-all: $(DATA_RAW) $(DATA_CLEANED) $(TRAINING_SET) $(TEST_SET) $(RESULTS) $(PLOTS) $(REPORT_HTML) $(REPORT_PDF)
 
 # clean up analysis and remove all files generated
 clean:
