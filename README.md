@@ -91,11 +91,11 @@ Hit `Ctrl + C` in the terminal to end the Jupyter Lab session. Run the following
 
 ### Developer notes
 
-Please see CONTRIBUTING.md.
+Feedback and Contribution instruction can be found [here](https://github.com/UBC-MDS/wine-quality-regressor-group-2/blob/main/CONTRIBUTING.md)
 
 ### License
 
-Please see License.
+License can be found [here](https://github.com/UBC-MDS/wine-quality-regressor-group-2/blob/main/LICENSE.md)
 
 ### References
 
