@@ -32,12 +32,12 @@ def eda(input_data, output_dir):
 
     # Generate and save plots
     plots = {
-        "quality_dist.png": create_quality_distribution_plot(train_df),
-        "quality_by_color.png": create_wine_quality_proportion_plot(train_df),
-        "sulfur_dioxide_scatter.png": create_sulfur_dioxide_scatter(train_df),
-        "correlation_matrix.png": create_correlation_matrix(train_df),
-        "boxplots.png": create_boxplots_by_color(train_df),
-        "quality_distribution.png": create_quality_distribution_bar(train_df)
+        "dist_wine_scores_by_feature.png": create_quality_distribution_plot(train_df),
+        "density_red_vs_white.png": create_wine_quality_proportion_plot(train_df),
+        "total_vs_free_sulfur_dioxide.png": create_sulfur_dioxide_scatter(train_df),
+        "feature_corrs.png": create_correlation_matrix(train_df),
+        "red_vs_white_all_features.png": create_boxplots_by_color(train_df),
+        "dist_wine_scores.png": create_quality_distribution_bar(train_df)
     }
 
     # Save all plots
