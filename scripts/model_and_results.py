@@ -91,9 +91,9 @@ def model_and_result(training_data, test_data, results_to, seed):
     )
 
     # Find best performing model through randomized search
-    random_search = find_best_model(model, stats.uniform(0.001, 100), 3, 50, 'accuracy', 42)
+    random_search = find_best_model(X_train, y_train, model, stats.uniform(0.001, 100), 3, 50, 'accuracy', 42)
     
-    random_search.fit(X_train, y_train)
+    # random_search.fit(X_train, y_train)
 
     # Best parameters
     print("Best Parameters:", random_search.best_params_)
