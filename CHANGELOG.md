@@ -28,6 +28,18 @@ This issue was based on a peer review.
 
 ![Changes can be found in this commit.](https://github.com/UBC-MDS/wine-quality-regressor-group-2/commit/e4c8b3ba198df9152ee66ebf02696874ac785b5a)
 
+## peer review: add hyperlink to CONTRIBUTING.md in README
+
+According to peer review comment I add hyperlink for license and contributing files.
+
+![Changes can be found in this commit.](https://github.com/UBC-MDS/wine-quality-regressor-group-2/commit/2becbaf6902d36735200d0f4ed479eeac56272e0)
+
+## [brief description of issue]
+
+According to peer review comment I add a variable section to explain the features.
+
+![Changes can be found in this commit.](https://github.com/UBC-MDS/wine-quality-regressor-group-2/commit/4998937fd7f9dc89ea8ebcbab1c71a362d1ee349)
+
 ## [brief description of issue]
 
 [url / evidence pointing to changes and explanation of changes made]
