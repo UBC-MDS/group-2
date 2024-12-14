@@ -2,7 +2,7 @@
 
 ## Author
 
-Alix, Paramveer, Susannah, Zoe
+Alix Zhou, Paramveer Singh, Susannah Sun, Zoe Ren
 
 ## About
 
@@ -10,7 +10,7 @@ This analysis investigates the relationship between physicochemical properties a
 
 We implemented a logistic regression model with standardized features and one-hot encoded categorical variables, using randomized search cross-validation to optimize the regularization parameter. The final model achieved an accuracy of 52.4% on the test set. While this performance suggests room for improvement, the analysis provides valuable insights for future research directions.
 
-The dataset used in this project is the Wine Quality dataset from the UCI Machine Learning Repository (Cortez et al. 2009) and can be found [here](https://archive.ics.uci.edu/dataset/186/wine+quality.) These datasets are related to red and white variants of the Portuguese “Vinho Verde” wine. They contains physicochemical properties (e.g., acidity, sugar content, and alcohol) of different wine samples, alongside a sensory score representing the quality of the wine, rated by experts on a scale from 0 to 10. Each row in the dataset represents a wine sample, with the columns detailing 11 physicochemical attributes and the quality score. The classes are ordered and not balanced (e.g. there are many more normal wines than excellent or poor ones).
+The dataset used in this project is the Wine Quality dataset from the UCI Machine Learning Repository (Cortez et al. 2009) and can be found [here](https://archive.ics.uci.edu/dataset/186/wine+quality.) These datasets are related to red and white variants of the Portuguese “Vinho Verde” wine. They contains physicochemical properties (e.g., acidity, sugar content, and alcohol) of different wine samples, alongside a sensory score representing the quality of the wine, rated by experts on a scale from 3 to 9. Each row in the dataset represents a wine sample, with the columns detailing 11 physicochemical attributes and the quality score. The classes are ordered and not balanced (e.g. there are many more normal wines than excellent or poor ones).
 
 Due to privacy and logistic issues, only physicochemical (inputs) and sensory (the output) variables are available (e.g. there is no data about grape types, wine brand, wine selling price, etc.).
 

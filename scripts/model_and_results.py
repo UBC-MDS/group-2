@@ -1,62 +1,35 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: light
-#       format_version: '1.5'
-#       jupytext_version: 1.16.4
-#   kernelspec:
-#     display_name: Python [conda env:522]
-#     language: python
-#     name: conda-env-522-py
-# ---
-
-# +
 import click
 import os
-# import altair as alt
-# import altair_ally as aly
+import sys
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+from src.write_data import write_data
+from src.find_best_model import find_best_model
+
 import numpy as np
 import pandas as pd
-# import pickle
-# from deepchecks.tabular.checks import FeatureLabelCorrelation, FeatureFeatureCorrelation
-# from deepchecks.tabular import Dataset
+import matplotlib.pyplot as plt
 
-# from ucimlrepo import fetch_ucirepo 
-# from sklearn.model_selection import train_test_split
-
-# from sklearn import set_config
 from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.compose import make_column_transformer
 from sklearn.pipeline import make_pipeline
 from sklearn.linear_model import LogisticRegression
-# from sklearn.model_selection import StratifiedKFold
 
 import scipy.stats as stats
 
 from sklearn.metrics import accuracy_score
-# from joblib import dump
 
-from src.write_data import write_data
-from src.find_best_model import find_best_model
 
 import warnings
 warnings.filterwarnings('ignore', category=FutureWarning)
-# import pandera as pa
 
 @click.command()
 @click.option('--training_data', type=str, help="Path to training data")
 @click.option('--test_data', type=str, help="Path to test data")
 @click.option('--results_to', type=str, help="Path to directory where the model's best parameter and accuracy score will be written to")
-# @click.option('--preprocessor_to', type=str, help="Path to preprocessor object")
-# @click.option('--columns-to-drop', type=str, help="Optional: columns to drop")
-# @click.option('--data-to', type=str, help="Path to directory where processed data will be written to")
-# @click.option('--pipeline-to', type=str, help="Path to directory where the pipeline object will be written to")
-# @click.option('--plot-to', type=str, help="Path to directory where the plot will be written to")
+@click.option('--plots_to', type=str, help="Path to directory where the model's analysis plots will be written to")
 @click.option('--seed', type=int, help="Random seed", default=522)
-def model_and_result(training_data, test_data, results_to, seed):
+def model_and_result(training_data, test_data, results_to, plots_to, seed):
     '''Fits a wine quality logistic regression model to the training data 
     and evaluates the model on the test data with accuracy score.'''
     np.random.seed(seed)
@@ -66,8 +39,7 @@ def model_and_result(training_data, test_data, results_to, seed):
     test_df = pd.read_csv(test_data)
 
     os.makedirs(results_to, exist_ok=True)
-    # cancer_preprocessor = pickle.load(open(preprocessor, "rb"))
-
+    os.makedirs(plots_to, exist_ok=True)
 
     # Split dataset
     X_train, X_test, y_train, y_test = (train_df.drop(columns='quality'), test_df.drop(columns='quality'),
@@ -82,7 +54,6 @@ def model_and_result(training_data, test_data, results_to, seed):
         (OneHotEncoder(drop='if_binary'), binary_features),
         (StandardScaler(), numeric_features)
     )
-    # pickle.dump(preprocessor, open(os.path.join(preprocessor_to, "wine_quality_preprocessor.pickle"), "wb"))
     
     # Make pipeline using StandardScaler and LogisticRegression
     model = make_pipeline(
@@ -93,18 +64,8 @@ def model_and_result(training_data, test_data, results_to, seed):
     # Find best performing model through randomized search and fit it using X_train and y_train
     random_search = find_best_model(X_train, y_train, model, stats.uniform(0.001, 100), 3, 50, 'accuracy', 42)
     
-    # random_search.fit(X_train, y_train)
-
     # Best parameters
     print("Best Parameters:", random_search.best_params_)
-
-    # with open(os.path.join(pipeline_to, "wine_quality_pipeline.pickle"), 'wb') as f:
-    #     pickle.dump(random_search, f)
-    
-    # scaled_train = preprocessor.transform(X_train)
-    # scaled_test = preprocessor.transform(X_test)
-    # scaled_train.to_csv(os.path.join(data_to, "scaled_wine_quality_train.csv"), index=False)
-    # scaled_test.to_csv(os.path.join(data_to, "scaled_wine_quality_test.csv"), index=False)
 
     # Evaluate
     y_pred = random_search.predict(X_test)
@@ -113,7 +74,30 @@ def model_and_result(training_data, test_data, results_to, seed):
     # Save best parameter and accuracy scores
     model_results = pd.DataFrame({'best_C': [random_search.best_params_['logisticregression__C']], 'accuracy': [test_acc]})
     write_data(model_results, results_to, "model_results.csv")
-    # model_results.to_csv(os.path.join(results_to, "model_results.csv"), index=False)
+
+    # Plot bar graphs for Logistic Regression coefficients
+    logreg = random_search.best_estimator_.named_steps['logisticregression']
+    coefficients = logreg.coef_
+    class_labels = logreg.classes_
+    for i, class_label in enumerate(class_labels):
+        plt.figure(figsize=(10, 6))
+        sorted_indices = np.argsort(coefficients[i])
+        sorted_features = np.array(list(X_train))[sorted_indices]
+        sorted_coefs = coefficients[i][sorted_indices]
+
+        plt.barh(sorted_features, sorted_coefs, color='skyblue')
+        plt.xlabel('Coefficient Value')
+        plt.ylabel('Feature')
+        plt.title(f'Feature Coefficients for Wine Quality {class_label}')
+        plt.tight_layout()
+
+        # Save the plot
+        filename = f'wine_quality_{class_label}_coefficients.png'
+        filepath = os.path.join(plots_to, filename)
+        plt.savefig(filepath, dpi=300)
+        plt.close()
+
+        print(f"Plot saved as {filepath}")
 
 if __name__ == '__main__':
     model_and_result()
