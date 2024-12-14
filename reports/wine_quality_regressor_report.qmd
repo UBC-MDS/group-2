@@ -1,6 +1,6 @@
 ---
 title: Analysis of Wine Quality and Prediction Using Logistic Regression
-author: 'Alix, Paramveer, Susannah, Zoe'
+author: 'Alix Zhou, Paramveer Singh, Susannah Sun, Zoe Ren'
 date: 2024/12/08
 format:
   html:

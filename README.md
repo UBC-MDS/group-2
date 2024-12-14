@@ -2,7 +2,7 @@
 
 ## Author
 
-Alix, Paramveer, Susannah, Zoe
+Alix Zhou, Paramveer Singh, Susannah Sun, Zoe Ren
 
 ## About
 
