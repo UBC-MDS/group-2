@@ -1,13 +1,17 @@
 # validate_raw_data.py
 # Author: Zoe Ren
-# 7 December 2024
+# 14 December 2024
 # Run by following command: python /scripts/validate_raw_data.py --input-path "./data/raw/wine_quality.csv" --processed-data-path "./data/processed"
 
 import os
 import click
 import pandas as pd
 import pandera as pa
-
+from src.data_validation import (
+    create_directory, 
+    read_data, 
+    validate_and_clean_data, 
+    save_data)
 
 @click.command()
 @click.option(
@@ -25,15 +29,14 @@ import pandera as pa
 def validate_raw_data(input_path, processed_data_path):
     """
     Script to validate and clean wine quality data.
-    Validate the raw data is step 1 of data validation done by pandera before data splitting. 
-    Validate the training data is step 2 of data validation done by deepchecks after data splitting.
+    Data validation done by pandera before data splitting. 
     """
     # Make sure folder exists for output
-    os.makedirs(processed_data_path, exist_ok=True)
+    create_directory(processed_data_path)
     
     # Read the data
     print(f"Reading data from {input_path}...")
-    raw_data = pd.read_csv(input_path)
+    raw_data = read_data(input_path)
 
     # Define the schema for validation
     schema = pa.DataFrameSchema(
@@ -62,7 +65,7 @@ def validate_raw_data(input_path, processed_data_path):
     # Validate and clean the data
     print("Validating and cleaning data through pandera...")
     try:
-        clean_data = schema.validate(raw_data, lazy=True).drop_duplicates().dropna(how="all")
+        clean_data = validate_and_clean_data(raw_data, schema)
         print("Validation successful.")
     except pa.errors.SchemaErrors as e:
         print("Validation failed. Errors:")
@@ -71,9 +74,9 @@ def validate_raw_data(input_path, processed_data_path):
 
     # Save cleaned data
     output_file = os.path.join(processed_data_path, "cleaned_wine_quality.csv")
-    clean_data.to_csv(output_file, index=False)
+    save_data(clean_data, output_file)
     print(f"Processed data saved to {output_file}")
-    print(f"Data validation step 1 is done.")
+    print(f"Data validation is done.")
 
 
 if __name__ == "__main__":
