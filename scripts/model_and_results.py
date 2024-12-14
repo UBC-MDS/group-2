@@ -26,7 +26,7 @@ import pandas as pd
 # from ucimlrepo import fetch_ucirepo 
 # from sklearn.model_selection import train_test_split
 
-from sklearn import set_config
+# from sklearn import set_config
 from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.compose import make_column_transformer
@@ -34,11 +34,13 @@ from sklearn.pipeline import make_pipeline
 from sklearn.linear_model import LogisticRegression
 # from sklearn.model_selection import StratifiedKFold
 
-from sklearn.model_selection import RandomizedSearchCV
 import scipy.stats as stats
 
 from sklearn.metrics import accuracy_score
 # from joblib import dump
+
+from src.write_data import write_data
+from src.find_best_model import find_best_model
 
 import warnings
 warnings.filterwarnings('ignore', category=FutureWarning)
@@ -88,18 +90,11 @@ def model_and_result(training_data, test_data, results_to, seed):
         LogisticRegression(multi_class='multinomial', solver='lbfgs', max_iter=2000)
     )
 
-    # Define parameter distribution
-    param_dist = {
-        'logisticregression__C': stats.uniform(0.001, 100),
-    }
+    # Find best performing model through randomized search and fit it using X_train and y_train
+    random_search = find_best_model(X_train, y_train, model, stats.uniform(0.001, 100), 3, 50, 'accuracy', 42)
     
-    # Perform randomized search
-    random_search = RandomizedSearchCV(model, param_distributions=param_dist,
-                                       cv=3, # The least populated class in y has only 4 members, which is less than n_splits=5.
-                                       n_iter=50,
-                                       scoring='accuracy', random_state=42)
-    random_search.fit(X_train, y_train)
-    
+    # random_search.fit(X_train, y_train)
+
     # Best parameters
     print("Best Parameters:", random_search.best_params_)
 
@@ -117,7 +112,8 @@ def model_and_result(training_data, test_data, results_to, seed):
 
     # Save best parameter and accuracy scores
     model_results = pd.DataFrame({'best_C': [random_search.best_params_['logisticregression__C']], 'accuracy': [test_acc]})
-    model_results.to_csv(os.path.join(results_to, "model_results.csv"), index=False)
+    write_data(model_results, results_to, "model_results.csv")
+    # model_results.to_csv(os.path.join(results_to, "model_results.csv"), index=False)
 
 if __name__ == '__main__':
     model_and_result()
