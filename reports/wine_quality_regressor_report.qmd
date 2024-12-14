@@ -103,7 +103,21 @@ Data was split with 80% being partitioned into the training set and 20% being pa
 
 We split and transform the data (i.e. wine color into binary variable and using standard scalers for all other features) and build our logistic regression model. Using RandomSearchCV, we find the best hyperparamter C for the model: `{python} results_df['best_C'].values[0]`.
 
-With our tuned model using the best C hyperparameter, we find the accuracy score of our predictions, comparing them to actual wine quality in the test set to be `{python} results_df['accuracy'].values[0]`.
+With our tuned model using the best C hyperparameter, we find the accuracy score of our predictions, comparing them to actual wine quality in the test set to be `{python} results_df['accuracy'].values[0]`. Below figures show feature coefficients found by the model with @fig-wine_quality_3_coefficients reflecting coefficients for wines with quality classification of 3 and @fig-wine_quality_9_coefficients for wine quality classification of 9.
+
+![](../results/figures/wine_quality_3_coefficients.png){#fig-wine_quality_3_coefficients width=50%}
+
+![](../results/figures/wine_quality_4_coefficients.png){#fig-wine_quality_4_coefficients width=50%}
+
+![](../results/figures/wine_quality_5_coefficients.png){#fig-wine_quality_5_coefficients width=50%}
+
+![](../results/figures/wine_quality_6_coefficients.png){#fig-wine_quality_6_coefficients width=50%}
+
+![](../results/figures/wine_quality_7_coefficients.png){#fig-wine_quality_7_coefficients width=50%}
+
+![](../results/figures/wine_quality_8_coefficients.png){#fig-wine_quality_8_coefficients width=50%}
+
+![](../results/figures/wine_quality_9_coefficients.png){#fig-wine_quality_9_coefficients width=50%}
 
 While the performance of this model is not likely very useful in predicting wine quality, as we observed an accuracy score of `{python} results_df['accuracy'].values[0]`, we gained insights on directions that could be further explored. First, we chose logistic regression as it is an intuitive first-step to approach a dataset with largely numeric features representing measurements of contents inside wines. Therefore, further analysis inspecting presence of linear relationships can be conducted using logistic regression results. We can then propose another model, e.g. tree-based ones like Random Forest [@aich2018], to see whether it does better in wine quality prediction should there be weak linear relationships observed. Second, data cleaning might benefit our decision in choosing an optimal model as outliers have been widely observed across many features, according to our EDA in the previous section. It might be worth it to understand what all features represent and apply human knowledge to modify and "treat" the data so that it is more suitable for training than how it is currently presented. This involves speaking with professionals that understand wine makeup and qualities and seek their insights on reasons of outlier presence and their indications. We believe conducting the above two next-steps will give us a better knowledge foundation in order for us to choose a model that performs better in the future.
 

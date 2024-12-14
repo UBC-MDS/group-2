@@ -7,7 +7,8 @@ TEST_SET = data/processed/test_set.csv
 DATA_CLEANED = data/processed/cleaned_wine_quality.csv
 DATA_RAW = data/raw/wine_quality.csv
 RESULTS = results/tables/model_results.csv
-PLOTS = results/figures/dist_wine_scores.png results/figures/red_vs_white_all_features.png results/figures/total_vs_free_sulfur_dioxide.png results/figures/feature_corrs.png results/figures/density_red_vs_white.png results/figures/dist_wine_scores_by_feature.png
+PLOTS_EDA = results/figures/dist_wine_scores.png results/figures/red_vs_white_all_features.png results/figures/total_vs_free_sulfur_dioxide.png results/figures/feature_corrs.png results/figures/density_red_vs_white.png results/figures/dist_wine_scores_by_feature.png
+PLOTS_MODEL = results/figures/wine_quality_3_coefficients.png results/figures/wine_quality_4_coefficients.png results/figures/wine_quality_5_coefficients.png results/figures/wine_quality_6_coefficients.png results/figures/wine_quality_7_coefficients.png results/figures/wine_quality_8_coefficients.png results/figures/wine_quality_9_coefficients.png
 REFERENCES = report/references.bib
 REPORT_HTML = reports/wine_quality_regressor_report.html
 REPORT_PDF = reports/wine_quality_regressor_report.pdf
@@ -40,19 +41,20 @@ $(DATA_CLEANED): ./scripts/validate_raw_data.py $(DATA_RAW)
 $(TRAINING_SET) $(TEST_SET): ./data/processed/split_done
 
 # script4: EDA - save plots to .png files
-$(PLOTS): ./scripts/eda.py $(TRAINING_SET)
+$(PLOTS_EDA): ./scripts/eda.py $(TRAINING_SET)
 	$(PYTHON) ./scripts/eda.py \
 		$(TRAINING_SET) \
 		./results/figures
 
-# script5: model and result - save model information and result to .csv
-$(RESULTS): ./scripts/model_and_results.py $(TRAINING_SET) $(TEST_SET)
+# script5: model and result - save model information, result to .csv and plots to .png files
+$(RESULTS) $(PLOTS_MODEL): ./scripts/model_and_results.py $(TRAINING_SET) $(TEST_SET)
 	$(PYTHON) ./scripts/model_and_results.py \
 		--training_data $(TRAINING_SET) \
 		--test_data $(TEST_SET) \
 		--results_to ./results/tables/ \
+		--plots_to ./results/figures/
 		--seed=522
-
+		
 # render reports using Quarto
 $(REPORT_HTML): $(PLOTS) $(RESULTS) $(REFERENCES) ./reports/wine_quality_regressor_report.qmd
 	$(QUARTO) render ./reports/wine_quality_regressor_report.qmd --to html
