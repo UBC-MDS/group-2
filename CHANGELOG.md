@@ -1,8 +1,10 @@
 # Issues Addressed from Feedback and Peer Review
 
+Note: We found there are many duplicated issues mentioned by multiple peer reviewers, including but not limited to: including author full names, plot image size adjustments, elaboration on interpretation of model results, and explanation of why further machine learing methods were not tried despite low accuracy score from the model. We have listed below changes based on the unique reviews we have received for conciseness and clarity.
+
 ## Expand on model results analysis and conclusion
 
-This issue was based on Milestone 1 instuctor feedback and 3 peer reviews.
+This issue was based on Milestone 1 instuctor feedback and 3 unique peer reviews.
 
 By adding plots showing Logistic Regression coefficients across 7 wine quality score classes, we reinstate the potential lack of linearity in the problem as it is currently presented, given existing features. We clarified reasons why we are hesitant to apply further machine learning methods, such as including F1, recall scores, or choosing a different, non-linear model, as we need better understanding of the data and what factors contribute to wine quality for red and white wines in real life. Without such understanding, we might incur risks of creating less effective features / models or increase possibilities of overfitting in the future.
 
@@ -10,7 +12,7 @@ By adding plots showing Logistic Regression coefficients across 7 wine quality s
 
 ## Add bar plots to show coefficients found by logistic regression
 
-This issue was based on a peer review.
+This issue was based on a unique peer review.
 
 We added bar plots showing feature coefficients from logistic regression for each wine quality class, generated png files in appropriate directory, and updated scripts and Makefile.
 
@@ -18,19 +20,19 @@ We added bar plots showing feature coefficients from logistic regression for eac
 
 ## Remove commended code in model_and_results.py
 
-This issue was based on a peer review.
+This issue was based on a unique peer review.
 
 [Changes can be found in this commit.](https://github.com/UBC-MDS/wine-quality-regressor-group-2/commit/64ea5df99d77b40d095f081705712fdd41f6db7d)
 
 ## Include author full names instead of first names only
 
-This issue was based on a peer review.
+This issue was based on a unique peer review.
 
 [Changes can be found in this commit.](https://github.com/UBC-MDS/wine-quality-regressor-group-2/commit/e4c8b3ba198df9152ee66ebf02696874ac785b5a)
 
 ## Add hyperlink to CONTRIBUTING.md in README(Zoe Ren-sgdkd)
 
-This issue was based on a peer review.
+This issue was based on a unique peer review.
 
 I add hyperlink for license and contributing files.
 
@@ -38,7 +40,7 @@ I add hyperlink for license and contributing files.
 
 ## Explain features(Zoe Ren-sgdkd)
 
-This issue was based on a peer review.
+This issue was based on a unique peer review.
 
 I add a Variable section to explain the features.
 
@@ -46,7 +48,7 @@ I add a Variable section to explain the features.
 
 ## State research question(Zoe Ren-sgdkd)
 
-This issue was based on a peer review.
+This issue was based on a unique peer review.
 
 I add a Core Hypothesis section to clearly state the research question.
 
@@ -54,7 +56,7 @@ I add a Core Hypothesis section to clearly state the research question.
 
 ## 'Why is it important'(Zoe Ren-sgdkd)
 
-This issue was based on a peer review.
+This issue was based on a unique peer review.
 
 I add a Importance section to explain the importance of this model.
 
