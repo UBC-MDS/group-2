@@ -35,6 +35,20 @@ We implemented a logistic regression model with standardized features and one-ho
 
 The quality of wine is influenced by various chemical properties and sensory factors that determine its taste, aroma, and overall acceptability. Here, we aim to predict the quality of wine using a publicly available wine quality dataset. Machine learning-based predictive modeling is commonly used in the field of wine quality to identify patterns and relationships in key features such as alcohol, sulfates, and volatile acidity, which are critical factors impacting wine quality [@jain2023]. By applying machine learning model, we seek to enhance the accuracy of wine quality predictions and contribute to the advancement of data-driven approaches in wine evaluation methodologies.
 
+### Core Hypothesis
+
+**The physicochemical properties of wine can be used to model and predict its quality score.**
+
+Based on previous study[@cortez2009], we utilized 12 chemical or physical features for this analysis: fixed acidity, volatile acidity, citric acid, residual sugar, chlorides, free sulfur dioxide, total sulfur dioxide, density, pH, sulphates, and alcohol.
+
+### Importance
+
+Predicting the quality of wine using physicochemical features is crucial for both winemakers and consumers. For winemakers, understanding how chemical and physical properties impact wine quality allows them to optimize production processes, maintain consistency, and improve overall product standards. By identifying key features that contribute to quality, producers can make data-driven decisions to refine fermentation, aging, and other production techniques.
+
+For consumers, such predictive modeling enhances transparency and trust. It provides a measurable basis for evaluating wine quality, helping consumers make more informed purchasing decisions and ensuring that expectations align with actual product quality.
+
+Moreover, this approach has broader implications for the wine industry. It reduces reliance on subjective sensory evaluations by human tasters, which can be inconsistent, and introduces a standardized, objective method for quality assessment. This not only streamlines quality control but also enables scalability in production while maintaining high standards.
+
 ## Methods
 
 ### Data
@@ -43,23 +57,34 @@ The dataset used in this project is the Wine Quality dataset from the UCI Machin
 
 Due to privacy and logistic issues, only physicochemical (inputs) and sensory (the output) variables are available (e.g. there is no data about grape types, wine brand, wine selling price, etc.).
 
-### Variable
+### Variable[@cortez2009]
 
-Input variables[@cortez2009] :
+**Input variables**:
 
 1 - fixed acidity : tartaric acid, gram per liter(cubic decimeter)
+
 2 - volatile acidity : acetic acid, gram per liter(cubic decimeter)
+
 3 - citric acid : citric acid, gram per liter(cubic decimeter)
+
 4 - residual sugar : residual sugar, gram per liter(cubic decimeter)
+
 5 - chlorides : sodium chloride, gram per liter(cubic decimeter)
+
 6 - free sulfur dioxide : free sulfur dioxide, milligram per liter(cubic decimeter)
+
 7 - total sulfur dioxide : total sulfur dioxide, milligram per liter(cubic decimeter)
+
 8 - density : density, gram per cubic centimeter
+
 9 - pH
+
 10 - sulphates : potassium sulphate, gram per liter(cubic decimeter)
+
 11 - alcohol : alcohol, percent by volume
 
-Output variable
+**Output variable**
+
 12 - quality (score between 0 and 10)
 
 #### 1.EDA
