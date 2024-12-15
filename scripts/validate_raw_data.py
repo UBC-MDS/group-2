@@ -3,10 +3,11 @@
 # 14 December 2024
 # Run by following command: python /scripts/validate_raw_data.py --input-path "./data/raw/wine_quality.csv" --processed-data-path "./data/processed"
 
-import os
+import os, sys
 import click
 import pandas as pd
 import pandera as pa
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from src.data_validation import (
     create_directory, 
     read_data, 

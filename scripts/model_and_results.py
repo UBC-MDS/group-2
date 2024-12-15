@@ -2,7 +2,7 @@ import click
 import os
 import sys
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-from src.write_data import write_data
+from src.data_validation import save_data
 from src.find_best_model import find_best_model
 
 import numpy as np
@@ -73,7 +73,8 @@ def model_and_result(training_data, test_data, results_to, plots_to, seed):
 
     # Save best parameter and accuracy scores
     model_results = pd.DataFrame({'best_C': [random_search.best_params_['logisticregression__C']], 'accuracy': [test_acc]})
-    write_data(model_results, results_to, "model_results.csv")
+    output_file = os.path.join(results_to, "model_results.csv")
+    save_data(model_results, output_file)
 
     # Plot bar graphs for Logistic Regression coefficients
     logreg = random_search.best_estimator_.named_steps['logisticregression']

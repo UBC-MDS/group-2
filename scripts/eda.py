@@ -1,7 +1,8 @@
 import pandas as pd
 import altair as alt
-import os
+import os, sys
 import click
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from src.eda_utils import (
     create_quality_distribution_plot,
     create_wine_quality_proportion_plot,

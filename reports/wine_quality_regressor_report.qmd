@@ -1,7 +1,7 @@
 ---
 title: Analysis of Wine Quality and Prediction Using Logistic Regression
 author: 'Alix Zhou, Paramveer Singh, Susannah Sun, Zoe Ren'
-date: 2024/12/08
+date: 2024/12/15
 format:
   html:
     toc: true
@@ -57,7 +57,7 @@ The dataset used in this project is the Wine Quality dataset from the UCI Machin
 
 Due to privacy and logistic issues, only physicochemical (inputs) and sensory (the output) variables are available (e.g. there is no data about grape types, wine brand, wine selling price, etc.).
 
-#### 1. Variable[@cortez2009]
+#### 1. Variables[@cortez2009]
 
 **Input variables**:
 
@@ -145,20 +145,6 @@ We split and transform the data (i.e. wine color into binary variable and using 
 
 With our tuned model using the best C hyperparameter, we find the accuracy score of our predictions, comparing them to actual wine quality in the test set to be `{python} results_df['accuracy'].values[0]`. Below figures show feature coefficients found by the model with @fig-wine_quality_3_coefficients reflecting coefficients for wines with quality classification of 3 and @fig-wine_quality_9_coefficients for wine quality classification of 9.
 
-![](../results/figures/wine_quality_3_coefficients.png){#fig-wine_quality_3_coefficients width="50%"}
-
-![](../results/figures/wine_quality_4_coefficients.png){#fig-wine_quality_4_coefficients width="50%"}
-
-![](../results/figures/wine_quality_5_coefficients.png){#fig-wine_quality_5_coefficients width="50%"}
-
-![](../results/figures/wine_quality_6_coefficients.png){#fig-wine_quality_6_coefficients width="50%"}
-
-![](../results/figures/wine_quality_7_coefficients.png){#fig-wine_quality_7_coefficients width="50%"}
-
-![](../results/figures/wine_quality_8_coefficients.png){#fig-wine_quality_8_coefficients width="50%"}
-
-![](../results/figures/wine_quality_9_coefficients.png){#fig-wine_quality_9_coefficients width="50%"}
-
 While the performance of this model is not likely very useful in predicting wine quality, as we observed an accuracy score of `{python} results_df['accuracy'].values[0]`, we gained insights on directions that could be further explored.
 
 First, we chose logistic regression as it is an intuitive first-step to approach a dataset with largely numeric features representing measurements of contents inside wines. Therefore, further analysis inspecting presence of linear relationships can be conducted using logistic regression results. The coefficients figures do not present clear visual pattern showing any specific feature significantly contribute to changes in wine quality classifications. In this case, we propose another model, e.g. tree-based ones like Random Forest [@aich2018], or ordinal regression models, to see whether it does better in wine quality prediction should there be weak linear relationships observed.
@@ -170,5 +156,19 @@ We believe grasping an understanding of how current features may interact and co
 Third, though our EDA looked at all features between red and white wines across quality scores, a separate data analysis studying feature differences between the 7 wine quality scores might be beneficial for each color (i.e. white and red) of wine. There may be features that behave similarly across particular classes which would make it difficult for models to separate them. In those cases, we might need to re-cluster or re-define wine quality classes to create different target variable values for prediction. Sometimes, reducing dimensionality in data helps provide a clearer picture of where features could be best separated. In addition, since we have just over 5000 observations in the training dataset, we could try to find more data which often leads to more information, keeping in mind potential class imbalances, and hence better models and predictions.
 
 We believe following the above three steps will help us create a better model to predict wine quality scores in the future.
+
+![](../results/figures/wine_quality_3_coefficients.png){#fig-wine_quality_3_coefficients width="100%"}
+
+![](../results/figures/wine_quality_4_coefficients.png){#fig-wine_quality_4_coefficients width="100%"}
+
+![](../results/figures/wine_quality_5_coefficients.png){#fig-wine_quality_5_coefficients width="100%"}
+
+![](../results/figures/wine_quality_6_coefficients.png){#fig-wine_quality_6_coefficients width="100%"}
+
+![](../results/figures/wine_quality_7_coefficients.png){#fig-wine_quality_7_coefficients width="100%"}
+
+![](../results/figures/wine_quality_8_coefficients.png){#fig-wine_quality_8_coefficients width="100%"}
+
+![](../results/figures/wine_quality_9_coefficients.png){#fig-wine_quality_9_coefficients width="100%"}
 
 ## References
