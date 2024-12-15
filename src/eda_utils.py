@@ -139,7 +139,7 @@ def create_boxplots_by_color(df):
         )
         plots.append(plot)
 
-    return alt.vconcat(*[alt.hconcat(*plots[i:i + 3]) for i in range(0, len(plots), 3)])
+    return alt.vconcat(*[alt.hconcat(*plots[i:i + 2]) for i in range(0, len(plots), 2)])
 
 def create_quality_distribution_bar(df):
     """Creates a bar chart showing wine quality score distribution.
