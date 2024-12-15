@@ -44,7 +44,7 @@ def eda(input_data, output_dir):
     # Save all plots
     for filename, plot in plots.items():
         path = os.path.join(output_dir, filename)
-        plot.save(path)
+        plot.save(path, ppi=200)
         print(f"Saved plot to {path}")
 
 if __name__ == "__main__":
