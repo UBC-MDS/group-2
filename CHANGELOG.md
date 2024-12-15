@@ -2,11 +2,11 @@
 
 ## Expand on model results analysis and conclusion
 
-This issue was based on Milestone 1 instuctor Feedback and 3 peer reviews.
+This issue was based on Milestone 1 instuctor feedback and 3 peer reviews.
 
-By adding plots showing Logistic Regression coefficients across 7 wine quality score classes, we reinstate the potential lack of linearily in the problem as it is currently presented, given existing features. We clarified reasons why we are hesitant to apply further machine learning methods, such as including F1, recall scores, or choosing a different non-linear model, as we need better understanding of the data and what factors contribute to wine quality for red and white wines in real life. Without such understanding, we might incur risks of creating less effective features / models or increase possibilities of overfitting in the future.
+By adding plots showing Logistic Regression coefficients across 7 wine quality score classes, we reinstate the potential lack of linearity in the problem as it is currently presented, given existing features. We clarified reasons why we are hesitant to apply further machine learning methods, such as including F1, recall scores, or choosing a different, non-linear model, as we need better understanding of the data and what factors contribute to wine quality for red and white wines in real life. Without such understanding, we might incur risks of creating less effective features / models or increase possibilities of overfitting in the future.
 
-![Changes can be found in this commit.](https://github.com/UBC-MDS/wine-quality-regressor-group-2/commit/83f242190b96a2b6cd2269380d224060fba22619)
+[Changes can be found in this commit.](https://github.com/UBC-MDS/wine-quality-regressor-group-2/commit/83f242190b96a2b6cd2269380d224060fba22619)
 
 ## Add bar plots to show coefficients found by logistic regression
 

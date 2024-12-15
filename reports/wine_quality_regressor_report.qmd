@@ -57,7 +57,7 @@ The dataset used in this project is the Wine Quality dataset from the UCI Machin
 
 Due to privacy and logistic issues, only physicochemical (inputs) and sensory (the output) variables are available (e.g. there is no data about grape types, wine brand, wine selling price, etc.).
 
-### Variable[@cortez2009]
+#### 1. Variable[@cortez2009]
 
 **Input variables**:
 
@@ -85,11 +85,11 @@ Due to privacy and logistic issues, only physicochemical (inputs) and sensory (t
 
 **Output variable**
 
-12 - quality (score between 0 and 10)
+12 - quality (score between 3 and 9)
 
-#### 1.EDA
+#### 2.EDA
 
-**1.1 Distribution of quality scores across numerical features**
+**2.1 Distribution of quality scores across numerical features**
 
 ![Distribution of wine quality scores by feature.](../results/figures/dist_wine_scores_by_feature.png){#fig-dist_wine_scores_by_feature width="100%"}
 
@@ -100,13 +100,13 @@ From the distribution plots in @fig-dist_wine_scores_by_feature, we have the fol
 3.  pH seems to have little discrimination power for quality (all quality levels overlap significantly)
 4.  The `density` feature does not showing any meaningful relationship with wine quality
 
-**1.2 Distribution of quality scores by categorical feature (wine color)**
+**2.2 Distribution of quality scores by categorical feature (wine color)**
 
 ![Comparison of red and white wine quality scores.](../results/figures/density_red_vs_white.png){#fig-density_red_vs_white width="100%"}
 
 @fig-density_red_vs_white simply shows that white wine in average tends to have higher quality scores than red wine.
 
-**1.3 Correlation matrix**
+**2.3 Correlation matrix**
 
 ![Correlation matrix of all features.](../results/figures/feature_corrs.png){#fig-feature_corrs width="100%"}
 
@@ -116,7 +116,7 @@ As @fig-feature_corrs shows, it seems that the correlation between total sulfur 
 
 From the scatter plot in @fig-total_vs_free_sulfur_dioxide, we can see that there is a positive linear correlation between between free and total sulfur dioxide, but the relationship is not perfectly linear. Since keeping both features would not make the model too complex, we will leave them both in the model for now.
 
-**1.4 Outlier detection**
+**2.4 Outlier detection**
 
 ![Comparison of levels for all features between red and wine wines.](../results/figures/red_vs_white_all_features.png){#fig-red_vs_white_all_features width="100%"}
 
@@ -129,7 +129,7 @@ From @fig-red_vs_white_all_features, we have the following findings:
     -   Most features show right-skewed distributions
     -   pH shows relatively normal distribution for both types
 
-**1.5 The distribution of the target variable(quality)**
+**2.5 The distribution of the target variable(quality)**
 
 ![](../results/figures/dist_wine_scores.png){#fig-dist_wine_scores width="100%"}
 
@@ -167,7 +167,7 @@ Second, delving more deeply into the dataset might benefit our decision in choos
 
 We believe grasping an understanding of how current features may interact and correlate with each other from a wine knowledge perspective can help us avoid creating "noise" features in a future model especially given the observed "randomness" in logistic regression coefficients across quality scores. Understanding what factors actually lead to a high quality red or white wine before continuing to select a different model and applying further mathematical and machine learning techniques can help us create more meaningful features and reduce overall risk of overfitting in a future model.
 
-Third, though our EDA looked at all features between red and white wines across quality scores, a separate data analysis studying feature differences between the 7 wine quality scores might be beneficial for each color (i.e. white and red) of wine. There may be features that behave similarly across particular classes which would make it difficult for models to separate them. In those cases, we might need to re-cluster or re-define wine quality classes to create different target variable values for prediction. Sometimes, reducing dimensionality in data helps provide a clearer picture of where features could be best separated. In addition, since we have just over 5000 observations in the dataset, we could try to find more data which often leads to more information, keeping in mind potential class imbalances, and hence better models and predictions.
+Third, though our EDA looked at all features between red and white wines across quality scores, a separate data analysis studying feature differences between the 7 wine quality scores might be beneficial for each color (i.e. white and red) of wine. There may be features that behave similarly across particular classes which would make it difficult for models to separate them. In those cases, we might need to re-cluster or re-define wine quality classes to create different target variable values for prediction. Sometimes, reducing dimensionality in data helps provide a clearer picture of where features could be best separated. In addition, since we have just over 5000 observations in the training dataset, we could try to find more data which often leads to more information, keeping in mind potential class imbalances, and hence better models and predictions.
 
 We believe following the above three steps will help us create a better model to predict wine quality scores in the future.
 
