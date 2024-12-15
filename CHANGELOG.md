@@ -28,17 +28,29 @@ This issue was based on a peer review.
 
 ![Changes can be found in this commit.](https://github.com/UBC-MDS/wine-quality-regressor-group-2/commit/e4c8b3ba198df9152ee66ebf02696874ac785b5a)
 
-## peer review: add hyperlink to CONTRIBUTING.md in README
+## peer review: add hyperlink to CONTRIBUTING.md in README(Zoe Ren-sgdkd)
 
-According to peer review comment I add hyperlink for license and contributing files.
+According to peer review comment, I add hyperlink for license and contributing files.
 
 ![Changes can be found in this commit.](https://github.com/UBC-MDS/wine-quality-regressor-group-2/commit/2becbaf6902d36735200d0f4ed479eeac56272e0)
 
-## [brief description of issue]
+## peer review: explain features(Zoe Ren-sgdkd)
 
-According to peer review comment I add a variable section to explain the features.
+According to peer review comment, I add a Variable section to explain the features.
 
 ![Changes can be found in this commit.](https://github.com/UBC-MDS/wine-quality-regressor-group-2/commit/4998937fd7f9dc89ea8ebcbab1c71a362d1ee349)
+
+## peer review: state research question(Zoe Ren-sgdkd)
+
+According to peer review comment, I add a Core Hypothesis section to clearly state the research question.
+
+![Changes can be found in this commit.](https://github.com/UBC-MDS/wine-quality-regressor-group-2/commit/89a5bea59c14b052789c6203d7a357688bfae76b)
+
+## peer review: 'why is it important'(Zoe Ren-sgdkd)
+
+According to peer review comment, I add a Importance section to explain the importance of this model.
+
+![Changes can be found in this commit.](https://github.com/UBC-MDS/wine-quality-regressor-group-2/commit/bf1f01c7c855d1f202f33352c2ae37702e121728)
 
 ## [brief description of issue]
 
