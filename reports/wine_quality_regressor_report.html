@@ -6,8 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Alix, Paramveer, Susannah, Zoe">
-<meta name="dcterms.date" content="2024-12-08">
+<meta name="author" content="Alix Zhou, Paramveer Singh, Susannah Sun, Zoe Ren">
+<meta name="dcterms.date" content="2024-12-15">
 
 <title>Analysis of Wine Quality and Prediction Using Logistic Regression</title>
 <style>
@@ -68,12 +68,17 @@ div.csl-indent {
    
   <ul>
   <li><a href="#summary" id="toc-summary" class="nav-link active" data-scroll-target="#summary">Summary</a></li>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a>
+  <ul>
+  <li><a href="#core-hypothesis" id="toc-core-hypothesis" class="nav-link" data-scroll-target="#core-hypothesis">Core Hypothesis</a></li>
+  <li><a href="#importance" id="toc-importance" class="nav-link" data-scroll-target="#importance">Importance</a></li>
+  </ul></li>
   <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a>
   <ul>
   <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a>
   <ul class="collapse">
-  <li><a href="#eda" id="toc-eda" class="nav-link" data-scroll-target="#eda">1.EDA</a></li>
+  <li><a href="#variablescortez2009" id="toc-variablescortez2009" class="nav-link" data-scroll-target="#variablescortez2009">1. Variables<span class="citation" data-cites="cortez2009">(Cortez 2009)</span></a></li>
+  <li><a href="#eda" id="toc-eda" class="nav-link" data-scroll-target="#eda">2.EDA</a></li>
   </ul></li>
   <li><a href="#analysis" id="toc-analysis" class="nav-link" data-scroll-target="#analysis">Analysis</a></li>
   </ul></li>
@@ -103,7 +108,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">December 8, 2024</p>
+      <p class="date">December 15, 2024</p>
     </div>
   </div>
   
@@ -123,6 +128,17 @@ div.csl-indent {
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>The quality of wine is influenced by various chemical properties and sensory factors that determine its taste, aroma, and overall acceptability. Here, we aim to predict the quality of wine using a publicly available wine quality dataset. Machine learning-based predictive modeling is commonly used in the field of wine quality to identify patterns and relationships in key features such as alcohol, sulfates, and volatile acidity, which are critical factors impacting wine quality <span class="citation" data-cites="jain2023">(<a href="#ref-jain2023" role="doc-biblioref">Jain 2023</a>)</span>. By applying machine learning model, we seek to enhance the accuracy of wine quality predictions and contribute to the advancement of data-driven approaches in wine evaluation methodologies.</p>
+<section id="core-hypothesis" class="level3">
+<h3 class="anchored" data-anchor-id="core-hypothesis">Core Hypothesis</h3>
+<p><strong>The physicochemical properties of wine can be used to model and predict its quality score.</strong></p>
+<p>Based on previous study<span class="citation" data-cites="cortez2009">(<a href="#ref-cortez2009" role="doc-biblioref">Cortez 2009</a>)</span>, we utilized 12 chemical or physical features for this analysis: fixed acidity, volatile acidity, citric acid, residual sugar, chlorides, free sulfur dioxide, total sulfur dioxide, density, pH, sulphates, and alcohol.</p>
+</section>
+<section id="importance" class="level3">
+<h3 class="anchored" data-anchor-id="importance">Importance</h3>
+<p>Predicting the quality of wine using physicochemical features is crucial for both winemakers and consumers. For winemakers, understanding how chemical and physical properties impact wine quality allows them to optimize production processes, maintain consistency, and improve overall product standards. By identifying key features that contribute to quality, producers can make data-driven decisions to refine fermentation, aging, and other production techniques.</p>
+<p>For consumers, such predictive modeling enhances transparency and trust. It provides a measurable basis for evaluating wine quality, helping consumers make more informed purchasing decisions and ensuring that expectations align with actual product quality.</p>
+<p>Moreover, this approach has broader implications for the wine industry. It reduces reliance on subjective sensory evaluations by human tasters, which can be inconsistent, and introduces a standardized, objective method for quality assessment. This not only streamlines quality control but also enables scalability in production while maintaining high standards.</p>
+</section>
 </section>
 <section id="methods" class="level2">
 <h2 class="anchored" data-anchor-id="methods">Methods</h2>
@@ -130,9 +146,26 @@ div.csl-indent {
 <h3 class="anchored" data-anchor-id="data">Data</h3>
 <p>The dataset used in this project is the Wine Quality dataset from the UCI Machine Learning Repository <span class="citation" data-cites="cortez2009">(<a href="#ref-cortez2009" role="doc-biblioref">Cortez 2009</a>)</span> and can be found <a href="https://archive.ics.uci.edu/dataset/186/wine+quality">here</a>. These datasets are related to red and white variants of the Portuguese “Vinho Verde” wine. They contains physicochemical properties (e.g., acidity, sugar content, and alcohol) of different wine samples, alongside a sensory score representing the quality of the wine, rated by experts on a scale from 0 to 10. Each row in the dataset represents a wine sample, with the columns detailing 11 physicochemical attributes and the quality score. The classes are ordered and not balanced (e.g.&nbsp;there are many more normal wines than excellent or poor ones).</p>
 <p>Due to privacy and logistic issues, only physicochemical (inputs) and sensory (the output) variables are available (e.g.&nbsp;there is no data about grape types, wine brand, wine selling price, etc.).</p>
+<section id="variablescortez2009" class="level4">
+<h4 class="anchored" data-anchor-id="variablescortez2009">1. Variables<span class="citation" data-cites="cortez2009">(<a href="#ref-cortez2009" role="doc-biblioref">Cortez 2009</a>)</span></h4>
+<p><strong>Input variables</strong>:</p>
+<p>1 - fixed acidity : tartaric acid, gram per liter(cubic decimeter)</p>
+<p>2 - volatile acidity : acetic acid, gram per liter(cubic decimeter)</p>
+<p>3 - citric acid : citric acid, gram per liter(cubic decimeter)</p>
+<p>4 - residual sugar : residual sugar, gram per liter(cubic decimeter)</p>
+<p>5 - chlorides : sodium chloride, gram per liter(cubic decimeter)</p>
+<p>6 - free sulfur dioxide : free sulfur dioxide, milligram per liter(cubic decimeter)</p>
+<p>7 - total sulfur dioxide : total sulfur dioxide, milligram per liter(cubic decimeter)</p>
+<p>8 - density : density, gram per cubic centimeter</p>
+<p>9 - pH</p>
+<p>10 - sulphates : potassium sulphate, gram per liter(cubic decimeter)</p>
+<p>11 - alcohol : alcohol, percent by volume</p>
+<p><strong>Output variable</strong></p>
+<p>12 - quality (score between 3 and 9)</p>
+</section>
 <section id="eda" class="level4">
-<h4 class="anchored" data-anchor-id="eda">1.EDA</h4>
-<p><strong>1.1 Distribution of quality scores across numerical features</strong></p>
+<h4 class="anchored" data-anchor-id="eda">2.EDA</h4>
+<p><strong>2.1 Distribution of quality scores across numerical features</strong></p>
 <div id="fig-dist_wine_scores_by_feature" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-dist_wine_scores_by_feature-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -150,7 +183,7 @@ Figure&nbsp;1: Distribution of wine quality scores by feature.
 <li>pH seems to have little discrimination power for quality (all quality levels overlap significantly)</li>
 <li>The <code>density</code> feature does not showing any meaningful relationship with wine quality</li>
 </ol>
-<p><strong>1.2 Distribution of quality scores by categorical feature (wine color)</strong></p>
+<p><strong>2.2 Distribution of quality scores by categorical feature (wine color)</strong></p>
 <div id="fig-density_red_vs_white" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-density_red_vs_white-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -162,7 +195,7 @@ Figure&nbsp;2: Comparison of red and white wine quality scores.
 </figure>
 </div>
 <p><a href="#fig-density_red_vs_white" class="quarto-xref">Figure&nbsp;2</a> simply shows that white wine in average tends to have higher quality scores than red wine.</p>
-<p><strong>1.3 Correlation matrix</strong></p>
+<p><strong>2.3 Correlation matrix</strong></p>
 <div id="fig-feature_corrs" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-feature_corrs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -185,7 +218,7 @@ Figure&nbsp;4: Comparison of levels between total Sulfur Dioxide vs free Sulfur 
 </figure>
 </div>
 <p>From the scatter plot in <a href="#fig-total_vs_free_sulfur_dioxide" class="quarto-xref">Figure&nbsp;4</a>, we can see that there is a positive linear correlation between between free and total sulfur dioxide, but the relationship is not perfectly linear. Since keeping both features would not make the model too complex, we will leave them both in the model for now.</p>
-<p><strong>1.4 Outlier detection</strong></p>
+<p><strong>2.4 Outlier detection</strong></p>
 <div id="fig-red_vs_white_all_features" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-red_vs_white_all_features-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -209,7 +242,7 @@ Figure&nbsp;5: Comparison of levels for all features between red and wine wines.
 <li>pH shows relatively normal distribution for both types</li>
 </ul></li>
 </ol>
-<p><strong>1.5 The distribution of the target variable(quality)</strong></p>
+<p><strong>2.5 The distribution of the target variable(quality)</strong></p>
 <div id="fig-dist_wine_scores" class="quarto-float quarto-figure quarto-figure-center anchored" width="100%">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-dist_wine_scores-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -230,9 +263,84 @@ Figure&nbsp;6
 </section>
 <section id="results-and-discussion" class="level2">
 <h2 class="anchored" data-anchor-id="results-and-discussion">Results and Discussion</h2>
-<p>We split and transform the data (i.e.&nbsp;wine color into binary variable and using standard scalers for all other features) and build our logistic regression model. Using RandomSearchCV, we find the best hyperparamter C for the model: 95.07.</p>
-<p>With our tuned model using the best C hyperparameter, we find the accuracy score of our predictions, comparing them to actual wine quality in the test set to be 0.54.</p>
-<p>While the performance of this model is not likely very useful in predicting wine quality, as we observed an accuracy score of 0.54, we gained insights on directions that could be further explored. First, we chose logistic regression as it is an intuitive first-step to approach a dataset with largely numeric features representing measurements of contents inside wines. Therefore, further analysis inspecting presence of linear relationships can be conducted using logistic regression results. We can then propose another model, e.g.&nbsp;tree-based ones like Random Forest <span class="citation" data-cites="aich2018">(<a href="#ref-aich2018" role="doc-biblioref">Aich 2018</a>)</span>, to see whether it does better in wine quality prediction should there be weak linear relationships observed. Second, data cleaning might benefit our decision in choosing an optimal model as outliers have been widely observed across many features, according to our EDA in the previous section. It might be worth it to understand what all features represent and apply human knowledge to modify and “treat” the data so that it is more suitable for training than how it is currently presented. This involves speaking with professionals that understand wine makeup and qualities and seek their insights on reasons of outlier presence and their indications. We believe conducting the above two next-steps will give us a better knowledge foundation in order for us to choose a model that performs better in the future.</p>
+<p>We split and transform the data (i.e.&nbsp;wine color into binary variable and using standard scalers for all other features) and build our logistic regression model. Using RandomSearchCV, we find the best hyperparamter C for the model: 61.19.</p>
+<p>With our tuned model using the best C hyperparameter, we find the accuracy score of our predictions, comparing them to actual wine quality in the test set to be 0.54. Below figures show feature coefficients found by the model with <a href="#fig-wine_quality_3_coefficients" class="quarto-xref">Figure&nbsp;7</a> reflecting coefficients for wines with quality classification of 3 and <a href="#fig-wine_quality_9_coefficients" class="quarto-xref">Figure&nbsp;13</a> for wine quality classification of 9.</p>
+<p>While the performance of this model is not likely very useful in predicting wine quality, as we observed an accuracy score of 0.54, we gained insights on directions that could be further explored.</p>
+<p>First, we chose logistic regression as it is an intuitive first-step to approach a dataset with largely numeric features representing measurements of contents inside wines. Therefore, further analysis inspecting presence of linear relationships can be conducted using logistic regression results. The coefficients figures do not present clear visual pattern showing any specific feature significantly contribute to changes in wine quality classifications. In this case, we propose another model, e.g.&nbsp;tree-based ones like Random Forest <span class="citation" data-cites="aich2018">(<a href="#ref-aich2018" role="doc-biblioref">Aich 2018</a>)</span>, or ordinal regression models, to see whether it does better in wine quality prediction should there be weak linear relationships observed.</p>
+<p>Second, delving more deeply into the dataset might benefit our decision in choosing an optimal model as outliers have been widely observed across many features according to our EDA in the previous section. It might be worth it to understand what all features represent and apply human knowledge to modify and “treat” the data so that it is more suitable for training than how it is currently presented. This involves speaking with professionals that understand wine makeup and qualities and seek their insights on reasons of outlier presence and their indications.</p>
+<p>We believe grasping an understanding of how current features may interact and correlate with each other from a wine knowledge perspective can help us avoid creating “noise” features in a future model especially given the observed “randomness” in logistic regression coefficients across quality scores. Understanding what factors actually lead to a high quality red or white wine before continuing to select a different model and applying further mathematical and machine learning techniques can help us create more meaningful features and reduce overall risk of overfitting in a future model.</p>
+<p>Third, though our EDA looked at all features between red and white wines across quality scores, a separate data analysis studying feature differences between the 7 wine quality scores might be beneficial for each color (i.e.&nbsp;white and red) of wine. There may be features that behave similarly across particular classes which would make it difficult for models to separate them. In those cases, we might need to re-cluster or re-define wine quality classes to create different target variable values for prediction. Sometimes, reducing dimensionality in data helps provide a clearer picture of where features could be best separated. In addition, since we have just over 5000 observations in the training dataset, we could try to find more data which often leads to more information, keeping in mind potential class imbalances, and hence better models and predictions.</p>
+<p>We believe following the above three steps will help us create a better model to predict wine quality scores in the future.</p>
+<div id="fig-wine_quality_3_coefficients" class="quarto-float quarto-figure quarto-figure-center anchored" width="100%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-wine_quality_3_coefficients-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../results/figures/wine_quality_3_coefficients.png" id="fig-wine_quality_3_coefficients" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-wine_quality_3_coefficients-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7
+</figcaption>
+</figure>
+</div>
+<div id="fig-wine_quality_4_coefficients" class="quarto-float quarto-figure quarto-figure-center anchored" width="100%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-wine_quality_4_coefficients-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../results/figures/wine_quality_4_coefficients.png" id="fig-wine_quality_4_coefficients" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-wine_quality_4_coefficients-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8
+</figcaption>
+</figure>
+</div>
+<div id="fig-wine_quality_5_coefficients" class="quarto-float quarto-figure quarto-figure-center anchored" width="100%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-wine_quality_5_coefficients-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../results/figures/wine_quality_5_coefficients.png" id="fig-wine_quality_5_coefficients" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-wine_quality_5_coefficients-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9
+</figcaption>
+</figure>
+</div>
+<div id="fig-wine_quality_6_coefficients" class="quarto-float quarto-figure quarto-figure-center anchored" width="100%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-wine_quality_6_coefficients-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../results/figures/wine_quality_6_coefficients.png" id="fig-wine_quality_6_coefficients" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-wine_quality_6_coefficients-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10
+</figcaption>
+</figure>
+</div>
+<div id="fig-wine_quality_7_coefficients" class="quarto-float quarto-figure quarto-figure-center anchored" width="100%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-wine_quality_7_coefficients-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../results/figures/wine_quality_7_coefficients.png" id="fig-wine_quality_7_coefficients" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-wine_quality_7_coefficients-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11
+</figcaption>
+</figure>
+</div>
+<div id="fig-wine_quality_8_coefficients" class="quarto-float quarto-figure quarto-figure-center anchored" width="100%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-wine_quality_8_coefficients-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../results/figures/wine_quality_8_coefficients.png" id="fig-wine_quality_8_coefficients" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-wine_quality_8_coefficients-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12
+</figcaption>
+</figure>
+</div>
+<div id="fig-wine_quality_9_coefficients" class="quarto-float quarto-figure quarto-figure-center anchored" width="100%">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-wine_quality_9_coefficients-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../results/figures/wine_quality_9_coefficients.png" id="fig-wine_quality_9_coefficients" class="img-fluid figure-img" style="width:100.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-wine_quality_9_coefficients-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;13
+</figcaption>
+</figure>
+</div>
 </section>
 <section id="references" class="level2 unnumbered">
 
