@@ -72,10 +72,10 @@ The reviewer suggested saving the final tuned model as a pickle file and changes
 
 ## Reorganize boxplots for easier viewing
 
-This issue was regarding the number of columns presented in the boxplots comparing the
-distributions of the various numerical features between the two types of wines.
+This issue was based on a unique peer review.
 
-The number of columns presented have been reduced from three to two columns.
+It was suggested that the number of columns presented in the boxplots comparing the
+distributions of the various numerical features between the two types of wines to be reduced from three to two columns.
 
 [Changes can be found in this commit.](https://github.com/UBC-MDS/wine-quality-regressor-group-2/commit/788af37afba3339024771c16093d87b6ef6dbf4d)
 
