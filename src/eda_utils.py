@@ -140,7 +140,7 @@ def create_boxplots_by_color(df):
         )
         plots.append(plot)
 
-    return alt.vconcat(*[alt.hconcat(*plots[i:i + 3]) for i in range(0, len(plots), 2)]).properties(
+    return alt.vconcat(*[alt.hconcat(*plots[i:i + 2]) for i in range(0, len(plots), 2)]).properties(
         title='Distribution of various quantities between the two types of wines'
     )
 
