@@ -12,6 +12,7 @@ PLOTS_MODEL = results/figures/wine_quality_3_coefficients.png results/figures/wi
 REFERENCES = reports/references.bib
 REPORT_HTML = reports/wine_quality_regressor_report.html
 REPORT_PDF = reports/wine_quality_regressor_report.pdf
+TUNED_MODEL = results/models/tuned_model.pickle
 
 .PHONY: all clean
 
@@ -42,12 +43,13 @@ $(PLOTS_EDA): ./scripts/eda.py $(TRAINING_SET)
 		./results/figures
 
 # script5: model and result - save model information, result to .csv and plots to .png files
-$(RESULTS) $(PLOTS_MODEL): ./scripts/model_and_results.py $(TRAINING_SET) $(TEST_SET)
+$(TUNED_MODEL) $(RESULTS) $(PLOTS_MODEL): ./scripts/model_and_results.py $(TRAINING_SET) $(TEST_SET)
 	$(PYTHON) ./scripts/model_and_results.py \
 		--training_data $(TRAINING_SET) \
 		--test_data $(TEST_SET) \
 		--results_to ./results/tables/ \
-		--plots_to ./results/figures/
+		--plots_to ./results/figures/ \
+		--model_to ./results/models/ \
 		--seed=522
 		
 # render reports using Quarto
@@ -56,8 +58,8 @@ $(REPORT_HTML): $(PLOTS) $(RESULTS) $(REFERENCES) ./reports/wine_quality_regress
 $(REPORT_PDF): $(PLOTS) $(RESULTS) $(REFERENCES) ./reports/wine_quality_regressor_report.qmd
 	$(QUARTO) render ./reports/wine_quality_regressor_report.qmd --to pdf
 
-all: $(DATA_RAW) $(DATA_CLEANED) $(TRAINING_SET) $(TEST_SET) $(PLOTS_EDA) $(RESULTS) $(PLOTS_MODEL) $(REPORT_HTML) $(REPORT_PDF)
+all: $(DATA_RAW) $(TUNED_MODEL) $(DATA_CLEANED) $(TRAINING_SET) $(TEST_SET) $(PLOTS_EDA) $(RESULTS) $(PLOTS_MODEL) $(REPORT_HTML) $(REPORT_PDF)
 
 # clean up analysis and remove all files generated
 clean:
-	rm -f $(DATA_RAW) $(DATA_CLEANED) $(TRAINING_SET) $(TEST_SET) $(PLOTS_EDA) $(RESULTS) $(PLOTS_MODEL) $(REPORT_HTML) $(REPORT_PDF)
+	rm -f $(TUNED_MODEL) $(DATA_RAW) $(DATA_CLEANED) $(TRAINING_SET) $(TEST_SET) $(PLOTS_EDA) $(RESULTS) $(PLOTS_MODEL) $(REPORT_HTML) $(REPORT_PDF)

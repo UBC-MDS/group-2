@@ -8,6 +8,7 @@ from src.find_best_model import find_best_model
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import pickle
 
 from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import OneHotEncoder
@@ -28,8 +29,9 @@ warnings.filterwarnings('ignore', category=FutureWarning)
 @click.option('--test_data', type=str, help="Path to test data")
 @click.option('--results_to', type=str, help="Path to directory where the model's best parameter and accuracy score will be written to")
 @click.option('--plots_to', type=str, help="Path to directory where the model's analysis plots will be written to")
+@click.option('--model_to', type=str, help='Path to directory where the tuned model is stored')
 @click.option('--seed', type=int, help="Random seed", default=522)
-def model_and_result(training_data, test_data, results_to, plots_to, seed):
+def model_and_result(training_data, test_data, results_to, plots_to, model_to, seed):
     '''Fits a wine quality logistic regression model to the training data 
     and evaluates the model on the test data with accuracy score.'''
     np.random.seed(seed)
@@ -40,6 +42,7 @@ def model_and_result(training_data, test_data, results_to, plots_to, seed):
 
     os.makedirs(results_to, exist_ok=True)
     os.makedirs(plots_to, exist_ok=True)
+    os.makedirs(model_to, exist_ok=True)
 
     # Split dataset
     X_train, X_test, y_train, y_test = (train_df.drop(columns='quality'), test_df.drop(columns='quality'),
@@ -63,7 +66,14 @@ def model_and_result(training_data, test_data, results_to, plots_to, seed):
 
     # Find best performing model through randomized search and fit it using X_train and y_train
     random_search = find_best_model(X_train, y_train, model, stats.uniform(0.001, 100), 3, 50, 'accuracy', 42)
-    
+
+    # Save the tuned model to output location
+    model_path = os.path.join(model_to, 'tuned_model.pickle')
+
+    with open(model_path, 'wb') as f:
+        pickle.dump(random_search, f)
+        print(f'Tunded model output to {model_path}')
+
     # Best parameters
     print("Best Parameters:", random_search.best_params_)
 
