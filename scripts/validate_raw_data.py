@@ -38,7 +38,7 @@ def validate_raw_data(input_path, processed_data_path):
     
     # Read the data
     print(f"Reading data from {input_path}...")
-    raw_data = read_data(input_path)
+    raw_data = pd.read_csv(input_path)
 
     # Define the schema for validation
     schema = pa.DataFrameSchema(
