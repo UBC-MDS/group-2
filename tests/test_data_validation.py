@@ -5,8 +5,7 @@ import pandera as pa
 import pytest
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from src.data_validation import (
-    create_directory, 
-    read_data, 
+    create_directory
     define_schema, 
     save_data)
 
@@ -18,26 +17,6 @@ def test_create_directory(tmp_path):
     path = tmp_path / "test_dir"  # Create a temporary directory path
     create_directory(path)  # Call the function to create the directory
     assert os.path.exists(path)  # Assert that the directory exists
-
-
-def test_read_data(tmp_path):
-    """
-    Test that the read_data function reads a CSV file correctly.
-    """
-    # Create a temporary CSV file
-    test_file = tmp_path / "test.csv"
-    df = pd.DataFrame({"col1": [1, 2, 3]})
-    df.to_csv(test_file, index=False)
-
-    # Read the CSV file using the read_data function
-    result = read_data(test_file)
-
-    # Assert that the read DataFrame is equal to the original
-    pd.testing.assert_frame_equal(result, df)
-
-    # Test invalid input with pytest.raises
-    with pytest.raises(ValueError):
-        read_data(None)  # Pass invalid input to trigger a ValueError
 
 
 def test_define_schema():

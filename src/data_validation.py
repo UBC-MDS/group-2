@@ -19,21 +19,6 @@ def create_directory(path):
     os.makedirs(path, exist_ok=True)
 
 
-def read_data(input_path):
-    """
-    Read data from a CSV file.
-
-    Parameters
-    ----------
-    input_path (str): The file path to the input CSV file. 
-
-    Returns
-    -------
-    pandas.DataFrame: A DataFrame containing the contents of the CSV file.
-    """
-    return pd.read_csv(input_path)
-
-
 def define_schema():
     """
     Define a Pandera schema for validating wine quality data.
