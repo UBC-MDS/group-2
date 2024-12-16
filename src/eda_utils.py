@@ -90,12 +90,13 @@ def create_sulfur_dioxide_scatter(df, sample_size=None):
     
     base = alt.Chart(plot_df).properties(
         width=500,
-        height=300
+        height=300,
+        title='The ratio of free sulfur dioxide to total stays quite consistent'
     )
     
     points = base.mark_circle(size=60).encode(
-        x=alt.X('free_sulfur_dioxide', title='Free Sulfur Dioxide'),
-        y=alt.Y('total_sulfur_dioxide', title='Total Sulfur Dioxide')
+        x=alt.X('free_sulfur_dioxide', title='Free Sulfur Dioxide (mg/L)'),
+        y=alt.Y('total_sulfur_dioxide', title='Total Sulfur Dioxide (mg/L)')
     )
     
     line = base.mark_line(color='red', size=2).encode(
@@ -139,7 +140,9 @@ def create_boxplots_by_color(df):
         )
         plots.append(plot)
 
-    return alt.vconcat(*[alt.hconcat(*plots[i:i + 2]) for i in range(0, len(plots), 2)])
+    return alt.vconcat(*[alt.hconcat(*plots[i:i + 3]) for i in range(0, len(plots), 2)]).properties(
+        title='Distribution of various quantities between the two types of wines'
+    )
 
 def create_quality_distribution_bar(df):
     """Creates a bar chart showing wine quality score distribution.
@@ -166,8 +169,8 @@ def create_quality_distribution_bar(df):
 
     # Create bar chart
     return alt.Chart(plot_df).mark_bar().encode(
-        x='quality:O',
-        y='percentage:Q',
+        x=alt.X('quality:O', title='Wine quality'),
+        y=alt.Y('percentage:Q', title='Percentage of wines'),
         tooltip=['quality:O', alt.Tooltip('percentage:Q', format='.1f')]
     ).properties(
         width=350,
