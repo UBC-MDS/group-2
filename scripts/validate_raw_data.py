@@ -10,9 +10,10 @@ import pandera as pa
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from src.data_validation import (
     create_directory, 
-    read_data, 
     validate_and_clean_data, 
     save_data)
+
+from src.read_data import read_data
 
 @click.command()
 @click.option(
