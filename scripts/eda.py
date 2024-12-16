@@ -12,6 +12,8 @@ from src.eda_utils import (
     create_quality_distribution_bar
 )
 
+from src.read_data import read_data
+
 @click.command()
 @click.argument("input_data", type=click.Path(exists=True))
 @click.argument("output_dir", type=click.Path())
@@ -29,7 +31,7 @@ def eda(input_data, output_dir):
     os.makedirs(output_dir, exist_ok=True)
 
     # Read data
-    train_df = pd.read_csv(input_data)
+    train_df = read_data(input_data)
 
     # Generate and save plots
     plots = {
