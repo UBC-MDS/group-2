@@ -4,6 +4,7 @@ import sys
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from src.data_validation import save_data
 from src.find_best_model import find_best_model
+from src.read_data import read_data
 
 import numpy as np
 import pandas as pd
@@ -35,8 +36,8 @@ def model_and_result(training_data, test_data, results_to, plots_to, seed):
     np.random.seed(seed)
 
     # Read in training and test data
-    train_df = pd.read_csv(training_data)
-    test_df = pd.read_csv(test_data)
+    train_df = read_data(training_data)
+    test_df = read_data(test_data)
 
     os.makedirs(results_to, exist_ok=True)
     os.makedirs(plots_to, exist_ok=True)
