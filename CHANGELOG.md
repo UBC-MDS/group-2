@@ -18,7 +18,7 @@ We added bar plots showing feature coefficients from logistic regression for eac
 
 [Changes can be found in this commit.](https://github.com/UBC-MDS/wine-quality-regressor-group-2/commit/e57f3f91fc2f6178ab918765ff792ebc7202990a)
 
-## Remove commended code in model_and_results.py
+## Remove commented code in model_and_results.py
 
 This issue was based on a unique peer review.
 
@@ -62,6 +62,29 @@ I add a Importance section to explain the importance of this model.
 
 [Changes can be found in this commit.](https://github.com/UBC-MDS/wine-quality-regressor-group-2/commit/bf1f01c7c855d1f202f33352c2ae37702e121728)
 
-## [brief description of issue]
+## Save model as pickle
 
-[url / evidence pointing to changes and explanation of changes made]
+This issue was based on not saving the final tuned model as a pickle file and was based on a
+unique peer review.
+
+The change was done and now the script saves the final tuned model as a pickle file in `results/models/` directory for use by another user.
+
+[Changes can be found in this commit.](https://github.com/UBC-MDS/wine-quality-regressor-group-2/commit/4026d568c9934c242b83af4c39d25017d02bc254)
+
+## Reorganize boxplots for easier viewing
+
+This issue was regarding the number of columns presented in the boxplots comparing the
+distributions of the various numerical features between the two types of wines.
+
+The number of columns presented have been reduced from three to two columns.
+
+[Changes can be found in this commit.](https://github.com/UBC-MDS/wine-quality-regressor-group-2/commit/788af37afba3339024771c16093d87b6ef6dbf4d)
+
+## Make plots more human-readable
+
+This issue was regarding the axes of the plots and how they should be more human-readable.
+
+Some of the plots were changed to have better axis titles and titles; however, this could not
+be done for all of the plots due to the nature of their generation using Altair Ally.
+
+[Changes can be found in this commit.](https://github.com/UBC-MDS/wine-quality-regressor-group-2/commit/f6dbdfa6882a2cf1fa0eab2732dadb147819fb01)
