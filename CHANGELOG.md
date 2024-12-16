@@ -64,10 +64,9 @@ I add a Importance section to explain the importance of this model.
 
 ## Save model as pickle
 
-This issue was based on not saving the final tuned model as a pickle file and was based on a
-unique peer review.
+This issue was based on a unique peer review.
 
-The change was done and now the script saves the final tuned model as a pickle file in `results/models/` directory for use by another user.
+The reviewer suggested saving the final tuned model as a pickle file and changes were made so that our script saves this model in `results/models/` directory for use by another user.
 
 [Changes can be found in this commit.](https://github.com/UBC-MDS/wine-quality-regressor-group-2/commit/4026d568c9934c242b83af4c39d25017d02bc254)
 
@@ -82,9 +81,9 @@ The number of columns presented have been reduced from three to two columns.
 
 ## Make plots more human-readable
 
-This issue was regarding the axes of the plots and how they should be more human-readable.
+This issue was based on a unique peer review.
 
-Some of the plots were changed to have better axis titles and titles; however, this could not
-be done for all of the plots due to the nature of their generation using Altair Ally.
+The reviewer mentioned the axes of the plots should be more human-readable. Some of the plots were changed to have better axis titles and titles; however, this could not
+be done for all of the plots due to the nature of their generation using Altair Ally. We might look into removing the underscores in feature names in the future if we decide to further improve the project.
 
 [Changes can be found in this commit.](https://github.com/UBC-MDS/wine-quality-regressor-group-2/commit/f6dbdfa6882a2cf1fa0eab2732dadb147819fb01)
