@@ -58,8 +58,8 @@ $(REPORT_HTML): $(PLOTS) $(RESULTS) $(REFERENCES) ./reports/wine_quality_regress
 $(REPORT_PDF): $(PLOTS) $(RESULTS) $(REFERENCES) ./reports/wine_quality_regressor_report.qmd
 	$(QUARTO) render ./reports/wine_quality_regressor_report.qmd --to pdf
 
-all: $(DATA_RAW) $(DATA_CLEANED) $(TRAINING_SET) $(TEST_SET) $(PLOTS_EDA) $(RESULTS) $(PLOTS_MODEL) $(REPORT_HTML) $(REPORT_PDF)
+all: $(DATA_RAW) $(TUNED_MODEL) $(DATA_CLEANED) $(TRAINING_SET) $(TEST_SET) $(PLOTS_EDA) $(RESULTS) $(PLOTS_MODEL) $(REPORT_HTML) $(REPORT_PDF)
 
 # clean up analysis and remove all files generated
 clean:
-	rm -f $(DATA_RAW) $(DATA_CLEANED) $(TRAINING_SET) $(TEST_SET) $(PLOTS_EDA) $(RESULTS) $(PLOTS_MODEL) $(REPORT_HTML) $(REPORT_PDF)
+	rm -f $(TUNED_MODEL) $(DATA_RAW) $(DATA_CLEANED) $(TRAINING_SET) $(TEST_SET) $(PLOTS_EDA) $(RESULTS) $(PLOTS_MODEL) $(REPORT_HTML) $(REPORT_PDF)
