@@ -92,10 +92,6 @@ be done for all of the plots due to the nature of their generation using Altair 
 
 Below are several issues we did not address given the limited length of our project duration. However, they do provide value for improvements, and if we choose to continue to work on this project in the future, we would consider addressing them at that point.
 
-### Plot size adjustments
-
-A couple of reviews mentioned enlarging smaller plots and downsizing larger plots in our EDA section for easy-reading. We are not addressing this issue at the moment as the focus of our report is on model results analysis, and the EDA analysis did not contribute significantly to the choice of our model or our findings and conclusion. Readers can use browser zoom-in tools for now, if they would like to study the smaller plots more thoroughly.
-
 ### Make a Github page for the report
 
 Since our current README.md links to our PDF report which is relatively readable for human eyes, we are leaving this issue unaddressed for now.
